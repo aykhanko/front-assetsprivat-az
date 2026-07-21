@@ -1,0 +1,50 @@
+.topBar {
+  background: linear-gradient(
+    160deg,
+    var(--color-navy-900) 0%,
+    var(--color-navy-700) 100%
+  );
+  border-bottom: 3px solid var(--color-accent-gold);
+}
+
+.inner {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0 var(--space-6);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-xs);
+  padding: 3px;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+}
+
+.departmentName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-on-brand);
+  line-height: var(--line-height-tight);
+}
+
+@media (max-width: 560px) {
+  .departmentName {
+    font-size: var(--font-size-xs);
+  }
+}

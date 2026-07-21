@@ -1,0 +1,60 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.formRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.checkboxLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--foreground-muted);
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--brand-primary);
+  cursor: pointer;
+}
+
+.forgotLink {
+  font-size: var(--font-size-sm);
+  color: var(--link-color);
+  font-weight: var(--font-weight-medium);
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.togglePassword {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-500);
+  padding: var(--space-2);
+}
+
+.togglePassword:hover {
+  color: var(--brand-primary);
+}
+
+.serverMessage {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-danger-bg);
+  border: var(--border-width) solid var(--color-danger);
+  border-radius: var(--radius-xs);
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+}

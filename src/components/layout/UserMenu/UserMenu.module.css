@@ -1,0 +1,119 @@
+.container {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  color: var(--text-on-brand);
+  border-radius: var(--radius-xs);
+  transition: background-color var(--transition-fast);
+}
+
+.trigger:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--text-on-brand);
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+}
+
+.fullName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  min-width: 240px;
+  background-color: var(--surface);
+  border: var(--border-width) solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.dropdownAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--brand-primary);
+  color: var(--text-on-brand);
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+}
+
+.dropdownInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dropdownName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background-color: var(--surface-border);
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+  transition: background-color var(--transition-fast);
+}
+
+.logoutButton:hover:not(:disabled) {
+  background-color: var(--color-danger-bg);
+}
+
+.logoutButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 560px) {
+  .fullName {
+    display: none;
+  }
+}

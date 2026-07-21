@@ -1,0 +1,69 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 var(--space-4);
+  background-color: var(--color-white);
+  border: var(--border-width) solid var(--surface-border);
+  border-radius: var(--radius-xs);
+  color: var(--foreground);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--color-gray-400);
+}
+
+.input:hover {
+  border-color: var(--color-gray-300);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--brand-secondary);
+  box-shadow: 0 0 0 3px var(--color-blue-100);
+}
+
+.input:disabled {
+  background-color: var(--color-gray-50);
+  color: var(--color-gray-400);
+  cursor: not-allowed;
+}
+
+.hasStartIcon {
+  padding-left: var(--space-10);
+}
+
+.startIcon {
+  position: absolute;
+  left: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-500);
+  pointer-events: none;
+}
+
+.endAdornment {
+  position: absolute;
+  right: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+}
+
+.error {
+  border-color: var(--color-danger);
+}
+
+.error:focus {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px var(--color-danger-bg);
+}

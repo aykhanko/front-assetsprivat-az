@@ -1,0 +1,129 @@
+/**
+ * Dizayn tokenləri (Design Tokens)
+ * ----------------------------------------------------------------------------
+ * Bütün rənglər, ölçülər, radiuslar və kölgələr bu fayldan idarə olunur.
+ * Komponentlərdə birbaşa "hex" dəyər yazmaq əvəzinə HƏMİŞƏ bu dəyişənlərdən
+ * istifadə edin ki, dizayn sistemi mərkəzləşdirilmiş qalsın.
+ */
+:root {
+  /* ---------------------------------------------------------------------- */
+  /* Rəng palitrası — tünd göy / mavi (dövlət rəsmi sistem üslubu)          */
+  /* ---------------------------------------------------------------------- */
+  --color-navy-950: #050e1f;
+  --color-navy-900: #0a1730;
+  --color-navy-800: #0f2247;
+  --color-navy-700: #142e5c;
+  --color-navy-600: #1a3b73;
+  --color-navy-500: #234a8c;
+
+  --color-blue-600: #14549e;
+  --color-blue-500: #1a63b8;
+  --color-blue-400: #2777cf;
+  --color-blue-300: #5b9bdd;
+  --color-blue-200: #a9cbec;
+  --color-blue-100: #dcebf9;
+  --color-blue-50: #f0f6fc;
+
+  --color-accent-gold: #a9812f;
+  --color-accent-red: #a8202f;
+  --color-accent-green: #1c6b3f;
+
+  /* Neytral rənglər */
+  --color-white: #ffffff;
+  --color-gray-50: #f7f9fb;
+  --color-gray-100: #eef1f5;
+  --color-gray-200: #dee3ea;
+  --color-gray-300: #c3cbd6;
+  --color-gray-400: #9aa5b3;
+  --color-gray-500: #6b7684;
+  --color-gray-600: #4c5563;
+  --color-gray-700: #333b47;
+  --color-gray-800: #1f2530;
+  --color-gray-900: #12161d;
+
+  --color-danger: #b3261e;
+  --color-danger-bg: #fdecec;
+  --color-success: #1c6b3f;
+  --color-success-bg: #eaf6ee;
+
+  /* ---------------------------------------------------------------------- */
+  /* Semantik dəyişənlər                                                    */
+  /* ---------------------------------------------------------------------- */
+  --background: var(--color-white);
+  --background-muted: var(--color-gray-50);
+  --foreground: var(--color-gray-900);
+  --foreground-muted: var(--color-gray-600);
+
+  --surface: var(--color-white);
+  --surface-border: var(--color-gray-200);
+
+  --brand-primary: var(--color-navy-800);
+  --brand-primary-strong: var(--color-navy-900);
+  --brand-secondary: var(--color-blue-500);
+  --brand-focus-ring: var(--color-blue-400);
+
+  --text-on-brand: var(--color-white);
+  --link-color: var(--color-blue-600);
+
+  /* ---------------------------------------------------------------------- */
+  /* Tipoqrafiya                                                            */
+  /* ---------------------------------------------------------------------- */
+  --font-sans: "Segoe UI", "Arial", "Helvetica Neue", Helvetica, sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 0.9375rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 1.75rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+
+  /* ---------------------------------------------------------------------- */
+  /* Boşluq şkalası (spacing scale)                                         */
+  /* ---------------------------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* ---------------------------------------------------------------------- */
+  /* Radius — dövlət sistemi üslubuna uyğun, minimal (demək olar kvadrat)   */
+  /* ---------------------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+
+  /* ---------------------------------------------------------------------- */
+  /* Kölgələr                                                               */
+  /* ---------------------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(10, 23, 48, 0.06);
+  --shadow-md: 0 2px 8px rgba(10, 23, 48, 0.1);
+  --shadow-lg: 0 8px 24px rgba(10, 23, 48, 0.16);
+
+  /* ---------------------------------------------------------------------- */
+  /* Keçidlər                                                               */
+  /* ---------------------------------------------------------------------- */
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+
+  /* ---------------------------------------------------------------------- */
+  /* Layout                                                                 */
+  /* ---------------------------------------------------------------------- */
+  --container-max-width: 1200px;
+  --border-width: 1px;
+}
