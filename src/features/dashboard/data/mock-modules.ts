@@ -30,7 +30,7 @@ export const MOCK_DASHBOARD_MODULES: DashboardModule[] = [
     description: "Torpaq sahələrinin özəlləşdirilməsi üzrə qeydiyyat",
     icon: "land",
     href: "/dashboard/land-plots",
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     id: "orders-and-decrees",
