@@ -22,7 +22,7 @@ export const MOCK_DASHBOARD_MODULES: DashboardModule[] = [
     description: "Əmlak kompleksləri üzrə status və uçot məlumatları",
     icon: "complex",
     href: "/dashboard/property-complexes",
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     id: "land-plots",
