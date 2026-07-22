@@ -1,0 +1,807 @@
+[
+  {
+    "id": "root-enterprises",
+    "slug": "muessiseler",
+    "title": "Müəssisələr",
+    "description": "Özəlləşdirilən müəssisələr üzrə məlumatların idarə edilməsi",
+    "columns": [
+      {
+        "id": "col-name",
+        "key": "name",
+        "label": "Daşınmaz əmlakın adı",
+        "type": "link",
+        "order": 0
+      },
+      {
+        "id": "col-location",
+        "key": "location",
+        "label": "Yerləşdiyi ərazi",
+        "type": "text",
+        "order": 1
+      },
+      {
+        "id": "col-address",
+        "key": "address",
+        "label": "Ünvanı",
+        "type": "text",
+        "order": 2
+      },
+      {
+        "id": "col-taxId",
+        "key": "taxId",
+        "label": "VÖEN",
+        "type": "text",
+        "order": 3
+      },
+      {
+        "id": "col-previousParentCompany",
+        "key": "previousParentCompany",
+        "label": "Əvvəlki tabeçi müəssisə adı",
+        "type": "text",
+        "order": 4
+      },
+      {
+        "id": "col-charterCapital",
+        "key": "charterCapital",
+        "label": "Nizamnamə kapitalı",
+        "type": "text",
+        "order": 5
+      },
+      {
+        "id": "col-landArea",
+        "key": "landArea",
+        "label": "Torpaq sahəsi",
+        "type": "text",
+        "order": 6
+      },
+      {
+        "id": "col-buildingArea",
+        "key": "buildingArea",
+        "label": "Tikililərin sahəsi",
+        "type": "text",
+        "order": 7
+      },
+      {
+        "id": "col-privatizationDate",
+        "key": "privatizationDate",
+        "label": "Özəlləşdirilmə tarixi",
+        "type": "text",
+        "order": 8
+      },
+      {
+        "id": "col-investorInfo",
+        "key": "investorInfo",
+        "label": "İnvestor haqqında məlumatlar",
+        "type": "link",
+        "order": 9
+      },
+      {
+        "id": "col-currentStatusAndIssues",
+        "key": "currentStatusAndIssues",
+        "label": "Müəssisənin mövcud vəziyyəti və problemləri",
+        "type": "link",
+        "order": 10
+      },
+      {
+        "id": "col-mapLink",
+        "key": "mapLink",
+        "label": "Məkana get",
+        "type": "link",
+        "order": 11
+      },
+      {
+        "id": "col-investmentCommitmentsAndStatus",
+        "key": "investmentCommitmentsAndStatus",
+        "label": "İnvestisiya öhdəlikləri və hazırki vəziyyət",
+        "type": "link",
+        "order": 12
+      }
+    ],
+    "rows": [
+      {
+        "id": "enterprise-1",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "enterprise-2",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "enterprise-3",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "enterprise-4",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "enterprise-5",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "enterprise-6",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "enterprise-7",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "enterprise-8",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      }
+    ],
+    "parentTableId": null,
+    "parentRowId": null,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "root-property-complexes",
+    "slug": "emlak-kompleksleri",
+    "title": "Əmlak kompleksləri",
+    "description": "Əmlak kompleksləri üzrə status və uçot məlumatları",
+    "columns": [
+      {
+        "id": "col-name",
+        "key": "name",
+        "label": "Daşınmaz əmlakın adı",
+        "type": "link",
+        "order": 0
+      },
+      {
+        "id": "col-location",
+        "key": "location",
+        "label": "Yerləşdiyi ərazi",
+        "type": "text",
+        "order": 1
+      },
+      {
+        "id": "col-address",
+        "key": "address",
+        "label": "Ünvanı",
+        "type": "text",
+        "order": 2
+      },
+      {
+        "id": "col-taxId",
+        "key": "taxId",
+        "label": "VÖEN",
+        "type": "text",
+        "order": 3
+      },
+      {
+        "id": "col-previousParentCompany",
+        "key": "previousParentCompany",
+        "label": "Əvvəlki tabeçi müəssisə adı",
+        "type": "text",
+        "order": 4
+      },
+      {
+        "id": "col-charterCapital",
+        "key": "charterCapital",
+        "label": "Nizamnamə kapitalı",
+        "type": "text",
+        "order": 5
+      },
+      {
+        "id": "col-landArea",
+        "key": "landArea",
+        "label": "Torpaq sahəsi",
+        "type": "text",
+        "order": 6
+      },
+      {
+        "id": "col-buildingArea",
+        "key": "buildingArea",
+        "label": "Tikililərin sahəsi",
+        "type": "text",
+        "order": 7
+      },
+      {
+        "id": "col-privatizationDate",
+        "key": "privatizationDate",
+        "label": "Özəlləşdirilmə tarixi",
+        "type": "text",
+        "order": 8
+      },
+      {
+        "id": "col-investorInfo",
+        "key": "investorInfo",
+        "label": "İnvestor haqqında məlumatlar",
+        "type": "link",
+        "order": 9
+      },
+      {
+        "id": "col-currentStatusAndIssues",
+        "key": "currentStatusAndIssues",
+        "label": "Kompleksin mövcud vəziyyəti və problemləri",
+        "type": "link",
+        "order": 10
+      },
+      {
+        "id": "col-mapLink",
+        "key": "mapLink",
+        "label": "Məkana get",
+        "type": "link",
+        "order": 11
+      },
+      {
+        "id": "col-investmentCommitmentsAndStatus",
+        "key": "investmentCommitmentsAndStatus",
+        "label": "İnvestisiya öhdəlikləri və hazırki vəziyyət",
+        "type": "link",
+        "order": 12
+      }
+    ],
+    "rows": [
+      {
+        "id": "complex-1",
+        "values": {
+          "name": "Bakı Sənaye Kompleksi",
+          "location": "Bakı şəhəri, Binəqədi rayonu",
+          "address": "Binəqədi şossesi, 45",
+          "taxId": "1300012345",
+          "previousParentCompany": "Azərittifaq İstehsalat Birliyi",
+          "charterCapital": "1 250 000 AZN",
+          "landArea": "3.2 ha",
+          "buildingArea": "8 400 m²",
+          "privatizationDate": "12.04.2015",
+          "investorInfo": "Mövcuddur",
+          "currentStatusAndIssues": "Ətraflı baxış",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": "İcra olunur"
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "complex-2",
+        "values": {
+          "name": "Sumqayıt Anbar Kompleksi",
+          "location": "Sumqayıt şəhəri",
+          "address": "Sənaye zonası, 12-ci məhəllə",
+          "taxId": "2200098765",
+          "previousParentCompany": "Sumqayıt Kimya Kombinatı",
+          "charterCapital": "870 000 AZN",
+          "landArea": "5.6 ha",
+          "buildingArea": "11 200 m²",
+          "privatizationDate": "27.09.2016",
+          "investorInfo": "Mövcuddur",
+          "currentStatusAndIssues": "Ətraflı baxış",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": "Qismən icra olunub"
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "complex-3",
+        "values": {
+          "name": "Gəncə Ticarət-Anbar Kompleksi",
+          "location": "Gəncə şəhəri",
+          "address": "H.Əliyev prospekti, 78",
+          "taxId": "3100054321",
+          "previousParentCompany": "Gəncə Tikinti Materialları IB",
+          "charterCapital": "540 000 AZN",
+          "landArea": "2.1 ha",
+          "buildingArea": "4 950 m²",
+          "privatizationDate": "03.11.2014",
+          "investorInfo": "Mövcuddur",
+          "currentStatusAndIssues": "Ətraflı baxış",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": "İcra olunur"
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "complex-4",
+        "values": {
+          "name": "Mingəçevir İstehsalat Kompleksi",
+          "location": "Mingəçevir şəhəri",
+          "address": "Sənaye küçəsi, 5",
+          "taxId": "4400011223",
+          "previousParentCompany": "Mingəçevir Toxuculuq Kombinatı",
+          "charterCapital": "1 980 000 AZN",
+          "landArea": "7.4 ha",
+          "buildingArea": "15 600 m²",
+          "privatizationDate": "19.06.2013",
+          "investorInfo": "Mövcuddur",
+          "currentStatusAndIssues": "Ətraflı baxış",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": "İcra olunmayıb"
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "complex-5",
+        "values": {
+          "name": "Şirvan Emal Kompleksi",
+          "location": "Şirvan şəhəri",
+          "address": "Neftçilər prospekti, 22",
+          "taxId": "5500067890",
+          "previousParentCompany": "Şirvan Kimya Zavodu",
+          "charterCapital": "2 340 000 AZN",
+          "landArea": "9.8 ha",
+          "buildingArea": "21 300 m²",
+          "privatizationDate": "08.02.2017",
+          "investorInfo": "Mövcuddur",
+          "currentStatusAndIssues": "Ətraflı baxış",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": "İcra olunur"
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "complex-6",
+        "values": {
+          "name": "Naxçıvan Logistika Kompleksi",
+          "location": "Naxçıvan MR",
+          "address": "Heydər Əliyev prospekti, 101",
+          "taxId": "6600045678",
+          "previousParentCompany": "Naxçıvan Nəqliyyat İB",
+          "charterCapital": "690 000 AZN",
+          "landArea": "4.3 ha",
+          "buildingArea": "6 700 m²",
+          "privatizationDate": "15.08.2018",
+          "investorInfo": "Mövcuddur",
+          "currentStatusAndIssues": "Ətraflı baxış",
+          "mapLink": "Google xəritəyə get",
+          "investmentCommitmentsAndStatus": "Qismən icra olunub"
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      }
+    ],
+    "parentTableId": null,
+    "parentRowId": null,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "root-land-plots",
+    "slug": "torpaq-saheleri",
+    "title": "Torpaq sahələri",
+    "description": "Torpaq sahələrinin özəlləşdirilməsi üzrə qeydiyyat",
+    "columns": [
+      {
+        "id": "col-objectName",
+        "key": "objectName",
+        "label": "Obyektin adı",
+        "type": "link",
+        "order": 0
+      },
+      {
+        "id": "col-address",
+        "key": "address",
+        "label": "Ünvanı",
+        "type": "link",
+        "order": 1
+      },
+      {
+        "id": "col-leaseAgreementNumberAndDate",
+        "key": "leaseAgreementNumberAndDate",
+        "label": "İcarə müqaviləsinin nömrəsi və tarixi",
+        "type": "text",
+        "order": 2
+      },
+      {
+        "id": "col-ownerInfo",
+        "key": "ownerInfo",
+        "label": "Mülkiyyətçi haqqında məlumat",
+        "type": "text",
+        "order": 3
+      },
+      {
+        "id": "col-ownershipDocumentNumberAndDate",
+        "key": "ownershipDocumentNumberAndDate",
+        "label": "Mülkiyyət hüququnu təsdiq edilməsinə dair sənədin nömrəsi və tarixi",
+        "type": "text",
+        "order": 4
+      },
+      {
+        "id": "col-documentedLandArea",
+        "key": "documentedLandArea",
+        "label": "Sənəd üzrə torpaq sahəsi (ha)",
+        "type": "text",
+        "order": 5
+      },
+      {
+        "id": "col-actualLandArea",
+        "key": "actualLandArea",
+        "label": "Torpağın faktiki sahəsi (ha)",
+        "type": "text",
+        "order": 6
+      },
+      {
+        "id": "col-pricePerSotka",
+        "key": "pricePerSotka",
+        "label": "Torpaq sahəsinin 1 sotunun qiyməti (manat)",
+        "type": "text",
+        "order": 7
+      },
+      {
+        "id": "col-totalLandPrice",
+        "key": "totalLandPrice",
+        "label": "Torpaq sahəsinin ümumi qiyməti (manat)",
+        "type": "text",
+        "order": 8
+      },
+      {
+        "id": "col-ownershipType",
+        "key": "ownershipType",
+        "label": "Dövlət və ya qeyri-dövlət",
+        "type": "text",
+        "order": 9
+      },
+      {
+        "id": "col-initialPrivatizationName",
+        "key": "initialPrivatizationName",
+        "label": "Obyektin ilkin özəlləşmə anındakı adı",
+        "type": "text",
+        "order": 10
+      },
+      {
+        "id": "col-activityType",
+        "key": "activityType",
+        "label": "Fəaliyyət növü (sağlıq evi, restoran, çayxana və s.)",
+        "type": "text",
+        "order": 11
+      },
+      {
+        "id": "col-zone",
+        "key": "zone",
+        "label": "Zona",
+        "type": "text",
+        "order": 12
+      },
+      {
+        "id": "col-category",
+        "key": "category",
+        "label": "Kateqoriya",
+        "type": "text",
+        "order": 13
+      },
+      {
+        "id": "col-protectionZone",
+        "key": "protectionZone",
+        "label": "Mühafizə zonası",
+        "type": "text",
+        "order": 14
+      },
+      {
+        "id": "col-objectDescription",
+        "key": "objectDescription",
+        "label": "Obyektin təsviri",
+        "type": "text",
+        "order": 15
+      },
+      {
+        "id": "col-currentStatus",
+        "key": "currentStatus",
+        "label": "Cari statusu",
+        "type": "text",
+        "order": 16
+      },
+      {
+        "id": "col-note",
+        "key": "note",
+        "label": "Qeyd (zəbt, sökülüb, park ərazisi, binanın bir hissəsi)",
+        "type": "text",
+        "order": 17
+      }
+    ],
+    "rows": [
+      {
+        "id": "land-plot-1",
+        "values": {
+          "objectName": "",
+          "address": "",
+          "leaseAgreementNumberAndDate": "",
+          "ownerInfo": "",
+          "ownershipDocumentNumberAndDate": "",
+          "documentedLandArea": "",
+          "actualLandArea": "",
+          "pricePerSotka": "",
+          "totalLandPrice": "",
+          "ownershipType": "",
+          "initialPrivatizationName": "",
+          "activityType": "",
+          "zone": "",
+          "category": "",
+          "protectionZone": "",
+          "objectDescription": "",
+          "currentStatus": "",
+          "note": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "land-plot-2",
+        "values": {
+          "objectName": "",
+          "address": "",
+          "leaseAgreementNumberAndDate": "",
+          "ownerInfo": "",
+          "ownershipDocumentNumberAndDate": "",
+          "documentedLandArea": "",
+          "actualLandArea": "",
+          "pricePerSotka": "",
+          "totalLandPrice": "",
+          "ownershipType": "",
+          "initialPrivatizationName": "",
+          "activityType": "",
+          "zone": "",
+          "category": "",
+          "protectionZone": "",
+          "objectDescription": "",
+          "currentStatus": "",
+          "note": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "land-plot-3",
+        "values": {
+          "objectName": "",
+          "address": "",
+          "leaseAgreementNumberAndDate": "",
+          "ownerInfo": "",
+          "ownershipDocumentNumberAndDate": "",
+          "documentedLandArea": "",
+          "actualLandArea": "",
+          "pricePerSotka": "",
+          "totalLandPrice": "",
+          "ownershipType": "",
+          "initialPrivatizationName": "",
+          "activityType": "",
+          "zone": "",
+          "category": "",
+          "protectionZone": "",
+          "objectDescription": "",
+          "currentStatus": "",
+          "note": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "land-plot-4",
+        "values": {
+          "objectName": "",
+          "address": "",
+          "leaseAgreementNumberAndDate": "",
+          "ownerInfo": "",
+          "ownershipDocumentNumberAndDate": "",
+          "documentedLandArea": "",
+          "actualLandArea": "",
+          "pricePerSotka": "",
+          "totalLandPrice": "",
+          "ownershipType": "",
+          "initialPrivatizationName": "",
+          "activityType": "",
+          "zone": "",
+          "category": "",
+          "protectionZone": "",
+          "objectDescription": "",
+          "currentStatus": "",
+          "note": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "land-plot-5",
+        "values": {
+          "objectName": "",
+          "address": "",
+          "leaseAgreementNumberAndDate": "",
+          "ownerInfo": "",
+          "ownershipDocumentNumberAndDate": "",
+          "documentedLandArea": "",
+          "actualLandArea": "",
+          "pricePerSotka": "",
+          "totalLandPrice": "",
+          "ownershipType": "",
+          "initialPrivatizationName": "",
+          "activityType": "",
+          "zone": "",
+          "category": "",
+          "protectionZone": "",
+          "objectDescription": "",
+          "currentStatus": "",
+          "note": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "land-plot-6",
+        "values": {
+          "objectName": "",
+          "address": "",
+          "leaseAgreementNumberAndDate": "",
+          "ownerInfo": "",
+          "ownershipDocumentNumberAndDate": "",
+          "documentedLandArea": "",
+          "actualLandArea": "",
+          "pricePerSotka": "",
+          "totalLandPrice": "",
+          "ownershipType": "",
+          "initialPrivatizationName": "",
+          "activityType": "",
+          "zone": "",
+          "category": "",
+          "protectionZone": "",
+          "objectDescription": "",
+          "currentStatus": "",
+          "note": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "land-plot-7",
+        "values": {
+          "objectName": "",
+          "address": "",
+          "leaseAgreementNumberAndDate": "",
+          "ownerInfo": "",
+          "ownershipDocumentNumberAndDate": "",
+          "documentedLandArea": "",
+          "actualLandArea": "",
+          "pricePerSotka": "",
+          "totalLandPrice": "",
+          "ownershipType": "",
+          "initialPrivatizationName": "",
+          "activityType": "",
+          "zone": "",
+          "category": "",
+          "protectionZone": "",
+          "objectDescription": "",
+          "currentStatus": "",
+          "note": ""
+        },
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+      }
+    ],
+    "parentTableId": null,
+    "parentRowId": null,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-07-22T19:39:52.814Z"
+  }
+]

@@ -1,0 +1,48 @@
+.topBar {
+  background: linear-gradient(
+    160deg,
+    var(--color-navy-900) 0%,
+    var(--color-navy-700) 100%
+  );
+  border-bottom: 3px solid var(--color-accent-gold);
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 var(--space-6);
+}
+
+.brand {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-on-brand);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.username {
+  font-size: var(--font-size-sm);
+  color: var(--color-blue-200);
+}
+
+.logoutButton {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-on-brand);
+  border: var(--border-width) solid rgba(255, 255, 255, 0.4);
+}
+
+.logoutButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
