@@ -10,6 +10,7 @@ import type {
   RenameColumnInput,
   RenameTableInput,
   UpdateCellInput,
+  UpdateCellMetaInput,
 } from "../validation/table.schema";
 import type {
   AdminTable,
@@ -95,6 +96,14 @@ export async function updateCell(
   return isApiMode()
     ? apiProvider.updateCellWithApiProvider(input)
     : mockProvider.updateCellWithMockProvider(input);
+}
+
+export async function updateCellMeta(
+  input: UpdateCellMetaInput
+): Promise<AdminTable> {
+  return isApiMode()
+    ? apiProvider.updateCellMetaWithApiProvider(input)
+    : mockProvider.updateCellMetaWithMockProvider(input);
 }
 
 export async function deleteRow(input: DeleteRowInput): Promise<AdminTable> {

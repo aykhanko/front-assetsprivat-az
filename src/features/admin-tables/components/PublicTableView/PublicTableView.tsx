@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { AdminTable, ChildTablesByCell } from "../../types";
+import { toAbsoluteExternalUrl } from "../../utils/external-url";
 import styles from "./PublicTableView.module.css";
 
 export interface PublicTableViewProps {
@@ -11,8 +12,8 @@ export interface PublicTableViewProps {
 
 /**
  * Admin Panel-də idarə olunan dinamik cədvəli `/dashboard` tərəfində
- * READ-ONLY göstərir. Alt cədvəli olan hüceyrələr mavi hiperlink kimi,
- * digərləri adi mətn kimi görünür.
+ * READ-ONLY göstərir. Alt cədvəli və ya xarici URL olan hüceyrələr mavi
+ * hiperlink kimi, digərləri adi mətn kimi görünür.
  */
 export function PublicTableView({
   table,
@@ -53,6 +54,7 @@ export function PublicTableView({
                 <td className={styles.serialCell}>{index + 1}</td>
                 {table.columns.map((column) => {
                   const value = row.values[column.key] ?? "";
+                  const meta = row.cellMeta?.[column.key];
                   const subTable = childTablesByCell[row.id]?.[column.id]?.[0];
 
                   return (
@@ -65,6 +67,16 @@ export function PublicTableView({
                         >
                           {value || subTable.title}
                         </Link>
+                      ) : meta?.externalUrl ? (
+                        <a
+                          href={toAbsoluteExternalUrl(meta.externalUrl)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.subTableValue}
+                          title={toAbsoluteExternalUrl(meta.externalUrl)}
+                        >
+                          {value || meta.externalUrl}
+                        </a>
                       ) : (
                         <span>{value}</span>
                       )}

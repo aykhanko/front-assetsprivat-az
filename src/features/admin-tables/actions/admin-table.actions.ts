@@ -11,6 +11,7 @@ import {
   renameTableSchema,
   addRowSchema,
   updateCellSchema,
+  updateCellMetaSchema,
 } from "../validation/table.schema";
 import {
   addColumn,
@@ -22,6 +23,7 @@ import {
   renameColumn,
   renameTable,
   updateCell,
+  updateCellMeta,
 } from "../services/admin-table.service";
 import type { AdminTable } from "../types";
 
@@ -142,6 +144,24 @@ export async function updateCellAction(
 
   try {
     const table = await updateCell(parsed.data);
+    revalidateAdmin();
+    return { success: true, table };
+  } catch (error) {
+    return { success: false, message: toErrorMessage(error) };
+  }
+}
+
+export async function updateCellMetaAction(
+  input: unknown
+): Promise<AdminTableActionResult> {
+  const parsed = updateCellMetaSchema.safeParse(input);
+
+  if (!parsed.success) {
+    return { success: false, message: parsed.error.issues[0]?.message };
+  }
+
+  try {
+    const table = await updateCellMeta(parsed.data);
     revalidateAdmin();
     return { success: true, table };
   } catch (error) {

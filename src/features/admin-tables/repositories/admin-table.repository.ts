@@ -63,6 +63,20 @@ export async function findChildTablesForColumn(
   );
 }
 
+export async function findChildTablesForCell(
+  tableId: string,
+  rowId: string,
+  columnId: string
+): Promise<AdminTable[]> {
+  const tables = await readAdminTables();
+  return tables.filter(
+    (table) =>
+      table.parentTableId === tableId &&
+      table.parentRowId === rowId &&
+      table.parentCellColumnId === columnId
+  );
+}
+
 export async function findChildTableBySlug(
   parentTableId: string,
   slug: string

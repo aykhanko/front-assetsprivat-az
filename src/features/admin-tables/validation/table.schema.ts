@@ -40,6 +40,19 @@ export const updateCellSchema = z.object({
   value: z.string().max(MAX_CELL_VALUE_LENGTH, "Dəyər çox uzundur"),
 });
 
+export const updateCellMetaSchema = z.object({
+  tableId: z.string().min(1),
+  rowId: z.string().min(1),
+  columnId: z.string().min(1),
+  externalUrl: z
+    .string()
+    .max(2000, "Link çox uzundur")
+    .optional(),
+  fileName: z.string().max(255, "Fayl adı çox uzundur").optional(),
+  clearExternalUrl: z.boolean().optional(),
+  clearFile: z.boolean().optional(),
+});
+
 export const deleteRowSchema = z.object({
   tableId: z.string().min(1),
   rowId: z.string().min(1),
@@ -73,6 +86,7 @@ export type RenameColumnInput = z.infer<typeof renameColumnSchema>;
 export type DeleteColumnInput = z.infer<typeof deleteColumnSchema>;
 export type AddRowInput = z.infer<typeof addRowSchema>;
 export type UpdateCellInput = z.infer<typeof updateCellSchema>;
+export type UpdateCellMetaInput = z.infer<typeof updateCellMetaSchema>;
 export type DeleteRowInput = z.infer<typeof deleteRowSchema>;
 export type RenameTableInput = z.infer<typeof renameTableSchema>;
 export type CreateSubTableInput = z.infer<typeof createSubTableSchema>;

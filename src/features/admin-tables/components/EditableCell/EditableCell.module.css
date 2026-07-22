@@ -1,3 +1,10 @@
+.cellWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 140px;
+}
+
 .cell {
   display: flex;
   align-items: flex-start;
@@ -7,7 +14,7 @@
 
 .textValue {
   display: block;
-  width: 100%;
+  flex: 1;
   min-height: 20px;
   cursor: text;
   white-space: pre-wrap;
@@ -17,37 +24,51 @@
 
 .subTableValue {
   display: block;
-  width: 100%;
+  flex: 1;
   color: var(--link-color);
   text-decoration: underline;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
-.editIconButton {
+.iconRow {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2px;
+}
+
+.editIconButton,
+.metaIconButton,
+.deleteIconButton {
   flex-shrink: 0;
   border: none;
   background: transparent;
-  color: var(--foreground-muted);
   cursor: pointer;
   font-size: var(--font-size-sm);
   line-height: 1;
   padding: 2px;
+}
+
+.editIconButton {
+  color: var(--foreground-muted);
 }
 
 .editIconButton:hover {
   color: var(--brand-primary-strong);
 }
 
+.metaIconButton {
+  opacity: 0.45;
+}
+
+.metaIconButton:hover,
+.metaIconActive {
+  opacity: 1;
+}
+
 .deleteIconButton {
-  flex-shrink: 0;
-  border: none;
-  background: transparent;
   color: var(--color-red-600, #b91c1c);
-  cursor: pointer;
-  font-size: var(--font-size-sm);
-  line-height: 1;
-  padding: 2px;
 }
 
 .deleteIconButton:hover {
@@ -71,4 +92,72 @@
 
 .input:focus-visible {
   outline: none;
+}
+
+.metaPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: var(--border-width) solid var(--surface-border);
+  background-color: var(--background-muted);
+}
+
+.metaLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground-muted);
+}
+
+.metaHint {
+  font-size: var(--font-size-xs);
+  color: var(--foreground-muted);
+  margin: 0;
+}
+
+.metaInput {
+  width: 100%;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-width) solid var(--surface-border);
+  border-radius: var(--radius-none);
+  font: inherit;
+  font-size: var(--font-size-sm);
+}
+
+.metaActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.metaSave,
+.metaCancel,
+.metaClear {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  text-decoration: underline;
+  padding: 0;
+}
+
+.metaSave {
+  color: var(--brand-primary-strong);
+  font-weight: var(--font-weight-medium);
+}
+
+.metaCancel {
+  color: var(--foreground-muted);
+}
+
+.metaClear {
+  color: var(--color-red-600, #b91c1c);
+  margin-right: auto;
+}
+
+.metaSave:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: none;
 }

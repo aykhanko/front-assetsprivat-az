@@ -1,4 +1,5 @@
 import * as repository from "../../repositories/admin-table.repository";
+import { toAbsoluteExternalUrl } from "../../utils/external-url";
 import { ensureUniqueSlug, slugify, slugifyKey } from "../../utils/slugify";
 import { generateId } from "../../utils/id";
 import type {
@@ -11,8 +12,10 @@ import type {
   RenameColumnInput,
   RenameTableInput,
   UpdateCellInput,
+  UpdateCellMetaInput,
 } from "../../validation/table.schema";
 import type {
+  AdminCellMeta,
   AdminColumn,
   AdminRow,
   AdminTable,
@@ -248,7 +251,13 @@ export async function deleteColumnWithMockProvider({
     rows: table.rows.map((row) => {
       const nextValues = { ...row.values };
       delete nextValues[columnToDelete.key];
-      return { ...row, values: nextValues };
+      const nextMeta = { ...(row.cellMeta ?? {}) };
+      delete nextMeta[columnToDelete.key];
+      return {
+        ...row,
+        values: nextValues,
+        cellMeta: Object.keys(nextMeta).length > 0 ? nextMeta : undefined,
+      };
     }),
   });
 
@@ -295,6 +304,92 @@ export async function updateCellWithMockProvider({
         ? { ...row, values: { ...row.values, [column.key]: value }, updatedAt: now }
         : row
     ),
+  });
+
+  const parentTable = await repository.replaceTable(updated);
+
+  // Box adı dəyişəndə həmin box-a bağlı alt cədvəlin başlığını avtomatik sinxron et.
+  const trimmed = value.trim();
+  if (trimmed) {
+    const attached = await repository.findChildTablesForCell(
+      tableId,
+      rowId,
+      columnId
+    );
+
+    for (const child of attached) {
+      if (child.title !== trimmed) {
+        await repository.replaceTable(
+          touch({ ...child, title: trimmed.slice(0, 160) })
+        );
+      }
+    }
+  }
+
+  return parentTable;
+}
+
+export async function updateCellMetaWithMockProvider({
+  tableId,
+  rowId,
+  columnId,
+  externalUrl,
+  fileName,
+  clearExternalUrl,
+  clearFile,
+}: UpdateCellMetaInput): Promise<AdminTable> {
+  const table = await requireTable(tableId);
+  const column = table.columns.find((item) => item.id === columnId);
+
+  if (!column) {
+    throw new Error("Sütun tapılmadı.");
+  }
+
+  const now = new Date().toISOString();
+  const updated = touch({
+    ...table,
+    rows: table.rows.map((row) => {
+      if (row.id !== rowId) {
+        return row;
+      }
+
+      const current: AdminCellMeta = { ...(row.cellMeta?.[column.key] ?? {}) };
+
+      if (clearExternalUrl) {
+        delete current.externalUrl;
+      } else if (typeof externalUrl === "string") {
+        const trimmed = externalUrl.trim();
+        if (trimmed) {
+          current.externalUrl = toAbsoluteExternalUrl(trimmed);
+        } else {
+          delete current.externalUrl;
+        }
+      }
+
+      if (clearFile) {
+        delete current.fileName;
+      } else if (typeof fileName === "string") {
+        const trimmed = fileName.trim();
+        if (trimmed) {
+          current.fileName = trimmed;
+        } else {
+          delete current.fileName;
+        }
+      }
+
+      const nextMeta = { ...(row.cellMeta ?? {}) };
+      if (Object.keys(current).length === 0) {
+        delete nextMeta[column.key];
+      } else {
+        nextMeta[column.key] = current;
+      }
+
+      return {
+        ...row,
+        cellMeta: Object.keys(nextMeta).length > 0 ? nextMeta : undefined,
+        updatedAt: now,
+      };
+    }),
   });
 
   return repository.replaceTable(updated);

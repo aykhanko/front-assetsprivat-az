@@ -8,6 +8,7 @@ import type {
   RenameColumnInput,
   RenameTableInput,
   UpdateCellInput,
+  UpdateCellMetaInput,
 } from "../../validation/table.schema";
 import type { AdminTable, ChildTableSummary, DescendantSubTableSummary, ResolvedAdminTable } from "../../types";
 
@@ -72,6 +73,12 @@ export async function updateCellWithApiProvider(
   _input: UpdateCellInput
 ): Promise<AdminTable> {
   return notImplemented("updateCell");
+}
+
+export async function updateCellMetaWithApiProvider(
+  _input: UpdateCellMetaInput
+): Promise<AdminTable> {
+  return notImplemented("updateCellMeta");
 }
 
 export async function deleteRowWithApiProvider(

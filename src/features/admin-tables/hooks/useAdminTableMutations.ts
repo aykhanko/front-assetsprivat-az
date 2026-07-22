@@ -11,6 +11,7 @@ import {
   renameColumnAction,
   renameTableAction,
   updateCellAction,
+  updateCellMetaAction,
 } from "../actions/admin-table.actions";
 import type { AdminTable, ChildTablesByCell } from "../types";
 
@@ -125,9 +126,57 @@ export function useAdminTableMutations({
         });
         if (result.success && result.table) {
           setTable(result.table);
+          const trimmed = value.trim();
+          if (trimmed) {
+            setChildTablesByCell((prev) => {
+              const byColumn = prev[rowId];
+              if (!byColumn?.[columnId]?.length) {
+                return prev;
+              }
+              return {
+                ...prev,
+                [rowId]: {
+                  ...byColumn,
+                  [columnId]: byColumn[columnId].map((child) => ({
+                    ...child,
+                    title: trimmed,
+                  })),
+                },
+              };
+            });
+          }
           setErrorMessage(null);
         } else {
           setErrorMessage(result.message ?? "Dəyər yadda saxlanıla bilmədi.");
+        }
+      });
+    },
+    [table.id]
+  );
+
+  const updateCellMeta = useCallback(
+    (
+      rowId: string,
+      columnId: string,
+      meta: {
+        externalUrl?: string;
+        fileName?: string;
+        clearExternalUrl?: boolean;
+        clearFile?: boolean;
+      }
+    ) => {
+      startTransition(async () => {
+        const result = await updateCellMetaAction({
+          tableId: table.id,
+          rowId,
+          columnId,
+          ...meta,
+        });
+        if (result.success && result.table) {
+          setTable(result.table);
+          setErrorMessage(null);
+        } else {
+          setErrorMessage(result.message ?? "Meta məlumat yadda saxlanıla bilmədi.");
         }
       });
     },
@@ -237,6 +286,7 @@ export function useAdminTableMutations({
     deleteColumn,
     addRow,
     updateCell,
+    updateCellMeta,
     deleteRow,
     renameTable,
     createSubTable,

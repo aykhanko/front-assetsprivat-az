@@ -21,8 +21,21 @@ export interface AdminRow {
   id: string;
   /** Sütun `key`-i -> hüceyrə dəyəri (həmişə string, UI tərəfindən formatlanır). */
   values: Record<string, string>;
+  /**
+   * Hər box üçün əlavə meta: xarici link və/və ya fayl/şəkil placeholder.
+   * Açarı sütun `key`-idir.
+   */
+  cellMeta?: Record<string, AdminCellMeta>;
   createdAt: string;
   updatedAt: string;
+}
+
+/** Bir hüceyrənin (box-un) əlavə məlumatları — mətn dəyərindən ayrı. */
+export interface AdminCellMeta {
+  /** Xarici URL (Google Maps, sənəd və s.). */
+  externalUrl?: string;
+  /** Fayl/şəkil adı və ya mock id — real upload hələ placeholder. */
+  fileName?: string;
 }
 
 export interface AdminTable {

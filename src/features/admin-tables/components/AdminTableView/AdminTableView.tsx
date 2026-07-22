@@ -65,6 +65,7 @@ export function AdminTableView({
     renameTable,
     createSubTable,
     deleteSubTable,
+    updateCellMeta,
   } = useAdminTableMutations({ initialTable, initialChildTablesByCell });
 
   const [isAddColumnOpen, setIsAddColumnOpen] = useState(false);
@@ -307,6 +308,7 @@ export function AdminTableView({
                         <td key={column.id}>
                           <EditableCell
                             value={row.values[column.key] ?? ""}
+                            cellMeta={row.cellMeta?.[column.key]}
                             isEditing={isEditing}
                             onStartEdit={() => setActiveCell(cellKey)}
                             onCancelEdit={() =>
@@ -322,6 +324,9 @@ export function AdminTableView({
                             }
                             onNavigate={(direction) =>
                               handleNavigate(cellKey, direction)
+                            }
+                            onUpdateMeta={(meta) =>
+                              updateCellMeta(row.id, column.id, meta)
                             }
                             subTableHref={
                               firstSubTable

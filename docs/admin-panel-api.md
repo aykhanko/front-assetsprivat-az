@@ -43,7 +43,8 @@ Fayl: `src/features/admin-tables/services/providers/api-admin-table.provider.ts`
 | Sütun adını dəyişmək | `renameColumnWithMockProvider()` | `PATCH /api/admin/tables/:tableId/columns/:columnId` | `{ label }` | `AdminTable` |
 | Sütunu silmək | `deleteColumnWithMockProvider()` | `DELETE /api/admin/tables/:tableId/columns/:columnId` | — | `AdminTable` |
 | Sətir əlavə etmək | `addRowWithMockProvider()` | `POST /api/admin/tables/:tableId/rows` | — | `AdminTable` |
-| Hüceyrə dəyərini yeniləmək | `updateCellWithMockProvider()` | `PATCH /api/admin/tables/:tableId/rows/:rowId/cells/:columnId` | `{ value }` | `AdminTable` |
+| Hüceyrə dəyərini yeniləmək | `updateCellWithMockProvider()` | `PATCH /api/admin/tables/:tableId/rows/:rowId/cells/:columnId` | `{ value }` | `AdminTable` (bağlı alt cədvəl adı dəyişə bilər) |
+| Hüceyrə meta (xarici link / fayl) | `updateCellMetaWithMockProvider()` | `PATCH /api/admin/tables/:tableId/rows/:rowId/cells/:columnId/meta` | `{ externalUrl?, fileName?, clearExternalUrl?, clearFile? }` | `AdminTable` |
 | Sətri silmək (kaskad) | `deleteRowWithMockProvider()` | `DELETE /api/admin/tables/:tableId/rows/:rowId` | — | `AdminTable` |
 | Cədvəl başlığını dəyişmək | `renameTableWithMockProvider()` | `PATCH /api/admin/tables/:tableId` | `{ title }` | `AdminTable` |
 | Sətrin bir hüceyrəsinə bağlı alt cədvəl yaratmaq | `createSubTableWithMockProvider()` | `POST /api/admin/tables/:tableId/rows/:rowId/sub-tables` | `{ columnId, title }` | `{ childTable: AdminTable }` |
@@ -60,9 +61,15 @@ interface AdminColumn {
   order: number;
 }
 
+interface AdminCellMeta {
+  externalUrl?: string;
+  fileName?: string; // upload hələ placeholder
+}
+
 interface AdminRow {
   id: string;
   values: Record<string, string>; // sütun key -> dəyər
+  cellMeta?: Record<string, AdminCellMeta>; // sütun key -> link/fayl
   createdAt: string;
   updatedAt: string;
 }

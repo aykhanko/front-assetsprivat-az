@@ -105,18 +105,23 @@
           "location": "test edirik",
           "address": "",
           "taxId": "",
-          "previousParentCompany": "",
+          "previousParentCompany": "uniaz",
           "charterCapital": "",
           "landArea": "",
           "buildingArea": "",
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
-        "updatedAt": "2026-07-22T20:45:29.993Z"
+        "updatedAt": "2026-07-22T20:54:08.645Z",
+        "cellMeta": {
+          "previousParentCompany": {
+            "externalUrl": "https://uniaz.info"
+          }
+        }
       },
       {
         "id": "enterprise-2",
@@ -132,7 +137,7 @@
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -152,7 +157,7 @@
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -172,11 +177,16 @@
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
-        "updatedAt": "2026-01-01T00:00:00.000Z"
+        "updatedAt": "2026-07-22T20:56:48.109Z",
+        "cellMeta": {
+          "address": {
+            "fileName": "hh"
+          }
+        }
       },
       {
         "id": "enterprise-5",
@@ -192,7 +202,7 @@
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -212,7 +222,7 @@
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -232,7 +242,7 @@
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -252,17 +262,37 @@
           "privatizationDate": "",
           "investorInfo": "",
           "currentStatusAndIssues": "",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
         "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "row-abfdbd73-3003-40d8-9365-bd3ee7331fd0",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-07-22T20:54:44.999Z",
+        "updatedAt": "2026-07-22T20:54:44.999Z"
       }
     ],
     "parentTableId": null,
     "parentRowId": null,
     "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-07-22T20:45:29.994Z"
+    "updatedAt": "2026-07-22T20:56:48.109Z"
   },
   {
     "id": "root-property-complexes",
@@ -377,7 +407,7 @@
           "privatizationDate": "12.04.2015",
           "investorInfo": "Mövcuddur",
           "currentStatusAndIssues": "Ətraflı baxış",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": "İcra olunur"
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -397,7 +427,7 @@
           "privatizationDate": "27.09.2016",
           "investorInfo": "Mövcuddur",
           "currentStatusAndIssues": "Ətraflı baxış",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": "Qismən icra olunub"
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -417,7 +447,7 @@
           "privatizationDate": "03.11.2014",
           "investorInfo": "Mövcuddur",
           "currentStatusAndIssues": "Ətraflı baxış",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": "İcra olunur"
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -437,7 +467,7 @@
           "privatizationDate": "19.06.2013",
           "investorInfo": "Mövcuddur",
           "currentStatusAndIssues": "Ətraflı baxış",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": "İcra olunmayıb"
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -457,7 +487,7 @@
           "privatizationDate": "08.02.2017",
           "investorInfo": "Mövcuddur",
           "currentStatusAndIssues": "Ətraflı baxış",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": "İcra olunur"
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
@@ -477,7 +507,7 @@
           "privatizationDate": "15.08.2018",
           "investorInfo": "Mövcuddur",
           "currentStatusAndIssues": "Ətraflı baxış",
-          "mapLink": "Google xəritəyə get",
+          "mapLink": "",
           "investmentCommitmentsAndStatus": "Qismən icra olunub"
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
