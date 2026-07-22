@@ -32,6 +32,18 @@ export const ROOT_TABLE_DEFINITIONS: RootTableDefinition[] = [
   },
 ];
 
+/**
+ * `/dashboard/*` görüntüləmə səhifələrinin öz (ingilis dilində, tarixi)
+ * URL seqmentlərini müvafiq admin root cədvəlinin slug-una uyğunlaşdırır.
+ * Bu sayədə `/dashboard` marşrutları dəyişmədən qalır, amma daxildə eyni
+ * canlı admin datasını oxuyur.
+ */
+export const DASHBOARD_ROOT_SLUG_TO_ADMIN_SLUG: Record<string, string> = {
+  enterprises: "muessiseler",
+  "property-complexes": "emlak-kompleksleri",
+  "land-plots": "torpaq-saheleri",
+};
+
 export const COLUMN_TYPE_OPTIONS: Array<{
   value: AdminColumnType;
   label: string;

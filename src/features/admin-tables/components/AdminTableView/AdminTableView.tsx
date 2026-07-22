@@ -5,34 +5,44 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui";
 import { useAdminTableMutations } from "../../hooks/useAdminTableMutations";
+import type { ChildTablesByCell } from "../../hooks/useAdminTableMutations";
 import { AddColumnDialog } from "../AddColumnDialog";
 import { ColumnMenu } from "../ColumnMenu";
-import { EditableCell } from "../EditableCell";
+import { ConfirmDialog } from "../ConfirmDialog";
+import { EditableCell, type CellNavigationDirection } from "../EditableCell";
 import { RowActionsCell } from "../RowActionsCell";
-import type {
-  AdminTable,
-  AdminTableBreadcrumb,
-  ChildTableSummary,
-} from "../../types";
+import type { AdminTable, AdminTableBreadcrumb } from "../../types";
 import styles from "./AdminTableView.module.css";
 
 export interface AdminTableViewProps {
   initialTable: AdminTable;
   breadcrumbs: AdminTableBreadcrumb[];
   path: string[];
-  initialChildTablesByRowId: Record<string, ChildTableSummary[]>;
+  initialChildTablesByCell: ChildTablesByCell;
+}
+
+interface ActiveCell {
+  rowId: string;
+  columnId: string;
+}
+
+interface PendingSubTableDeletion {
+  rowId: string;
+  columnId: string;
+  childTableId: string;
+  title: string;
 }
 
 export function AdminTableView({
   initialTable,
   breadcrumbs,
   path,
-  initialChildTablesByRowId,
+  initialChildTablesByCell,
 }: AdminTableViewProps) {
   const router = useRouter();
   const {
     table,
-    childTablesByRowId,
+    childTablesByCell,
     errorMessage,
     isPending,
     clearError,
@@ -44,11 +54,15 @@ export function AdminTableView({
     deleteRow,
     renameTable,
     createSubTable,
-  } = useAdminTableMutations({ initialTable, initialChildTablesByRowId });
+    deleteSubTable,
+  } = useAdminTableMutations({ initialTable, initialChildTablesByCell });
 
   const [isAddColumnOpen, setIsAddColumnOpen] = useState(false);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleDraft, setTitleDraft] = useState(table.title);
+  const [activeCell, setActiveCell] = useState<ActiveCell | null>(null);
+  const [pendingSubTableDeletion, setPendingSubTableDeletion] =
+    useState<PendingSubTableDeletion | null>(null);
 
   const submitTitle = () => {
     const trimmed = titleDraft.trim();
@@ -67,6 +81,59 @@ export function AdminTableView({
       setTitleDraft(table.title);
       setIsEditingTitle(false);
     }
+  };
+
+  const getAdjacentCell = (
+    current: ActiveCell,
+    direction: CellNavigationDirection
+  ): ActiveCell | null => {
+    const rowIndex = table.rows.findIndex((row) => row.id === current.rowId);
+    const colIndex = table.columns.findIndex(
+      (column) => column.id === current.columnId
+    );
+    if (rowIndex === -1 || colIndex === -1) return null;
+
+    if (direction === "next") {
+      if (colIndex + 1 < table.columns.length) {
+        return { rowId: current.rowId, columnId: table.columns[colIndex + 1].id };
+      }
+      if (rowIndex + 1 < table.rows.length) {
+        return { rowId: table.rows[rowIndex + 1].id, columnId: table.columns[0].id };
+      }
+      return null;
+    }
+
+    if (direction === "prev") {
+      if (colIndex - 1 >= 0) {
+        return { rowId: current.rowId, columnId: table.columns[colIndex - 1].id };
+      }
+      if (rowIndex - 1 >= 0) {
+        return {
+          rowId: table.rows[rowIndex - 1].id,
+          columnId: table.columns[table.columns.length - 1].id,
+        };
+      }
+      return null;
+    }
+
+    if (direction === "down") {
+      if (rowIndex + 1 < table.rows.length) {
+        return { rowId: table.rows[rowIndex + 1].id, columnId: current.columnId };
+      }
+      return null;
+    }
+
+    if (rowIndex - 1 >= 0) {
+      return { rowId: table.rows[rowIndex - 1].id, columnId: current.columnId };
+    }
+    return null;
+  };
+
+  const handleNavigate = (
+    current: ActiveCell,
+    direction: CellNavigationDirection
+  ) => {
+    setActiveCell(getAdjacentCell(current, direction));
   };
 
   return (
@@ -182,28 +249,75 @@ export function AdminTableView({
                 table.rows.map((row, index) => (
                   <tr key={row.id}>
                     <td className={styles.serialCell}>{index + 1}</td>
-                    {table.columns.map((column) => (
-                      <td key={column.id}>
-                        <EditableCell
-                          value={row.values[column.key] ?? ""}
-                          type={column.type}
-                          onSave={(value) =>
-                            updateCell(row.id, column.id, value)
-                          }
-                        />
-                      </td>
-                    ))}
+                    {table.columns.map((column) => {
+                      const cellSubTables =
+                        childTablesByCell[row.id]?.[column.id] ?? [];
+                      const firstSubTable = cellSubTables[0];
+                      const cellKey: ActiveCell = {
+                        rowId: row.id,
+                        columnId: column.id,
+                      };
+                      const isEditing =
+                        activeCell?.rowId === row.id &&
+                        activeCell?.columnId === column.id;
+
+                      return (
+                        <td key={column.id}>
+                          <EditableCell
+                            value={row.values[column.key] ?? ""}
+                            type={column.type}
+                            isEditing={isEditing}
+                            onStartEdit={() => setActiveCell(cellKey)}
+                            onCancelEdit={() =>
+                              setActiveCell((current) =>
+                                current?.rowId === row.id &&
+                                current?.columnId === column.id
+                                  ? null
+                                  : current
+                              )
+                            }
+                            onCommit={(value) =>
+                              updateCell(row.id, column.id, value)
+                            }
+                            onNavigate={(direction) =>
+                              handleNavigate(cellKey, direction)
+                            }
+                            subTableHref={
+                              firstSubTable
+                                ? `/admin/${[...path, firstSubTable.slug].join("/")}`
+                                : undefined
+                            }
+                            onDeleteSubTable={
+                              firstSubTable
+                                ? () =>
+                                    setPendingSubTableDeletion({
+                                      rowId: row.id,
+                                      columnId: column.id,
+                                      childTableId: firstSubTable.id,
+                                      title: firstSubTable.title,
+                                    })
+                                : undefined
+                            }
+                          />
+                        </td>
+                      );
+                    })}
                     <td>
                       <RowActionsCell
+                        row={row}
+                        columns={table.columns}
+                        existingByColumn={childTablesByCell[row.id] ?? {}}
                         path={path}
-                        childTables={childTablesByRowId[row.id] ?? []}
                         isPending={isPending}
-                        onCreateSubTable={(title) =>
-                          createSubTable(row.id, title, (childTable) => {
+                        onCreateSubTable={(columnId, title) =>
+                          createSubTable(row.id, columnId, title, (childTable) => {
                             router.push(
                               `/admin/${[...path, childTable.slug].join("/")}`
                             );
                           })
+                        }
+                        onDeleteSubTable={(columnId, childTableId) =>
+                          deleteSubTable(row.id, columnId, childTableId)
                         }
                         onDeleteRow={() => deleteRow(row.id)}
                       />
@@ -224,6 +338,28 @@ export function AdminTableView({
           setIsAddColumnOpen(false);
         }}
         onCancel={() => setIsAddColumnOpen(false)}
+      />
+
+      <ConfirmDialog
+        isOpen={Boolean(pendingSubTableDeletion)}
+        title="Alt cədvəli sil"
+        message={
+          pendingSubTableDeletion
+            ? `"${pendingSubTableDeletion.title}" alt cədvəlini (və varsa nəvə cədvəlləri) silmək istədiyinizə əminsiniz?`
+            : ""
+        }
+        isPending={isPending}
+        onConfirm={() => {
+          if (pendingSubTableDeletion) {
+            deleteSubTable(
+              pendingSubTableDeletion.rowId,
+              pendingSubTableDeletion.columnId,
+              pendingSubTableDeletion.childTableId
+            );
+          }
+          setPendingSubTableDeletion(null);
+        }}
+        onCancel={() => setPendingSubTableDeletion(null)}
       />
     </div>
   );

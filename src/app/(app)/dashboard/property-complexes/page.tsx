@@ -1,19 +1,38 @@
 import type { Metadata } from "next";
-import { PropertyComplexesTable } from "@/features/property-complexes/components/PropertyComplexesTable";
-import { MOCK_PROPERTY_COMPLEXES } from "@/features/property-complexes/data/mock-property-complexes";
+import { notFound } from "next/navigation";
+import { PublicTableView } from "@/features/admin-tables/components/PublicTableView";
+import { DASHBOARD_ROOT_SLUG_TO_ADMIN_SLUG } from "@/features/admin-tables/constants";
+import {
+  getChildTablesByCell,
+  resolveTableByPath,
+} from "@/features/admin-tables/services/admin-table.service";
 import styles from "./property-complexes-page.module.css";
 
 export const metadata: Metadata = {
   title: "Əmlak kompleksləri",
 };
 
-export default function PropertyComplexesPage() {
+export default async function PropertyComplexesPage() {
+  const dashboardPath = ["property-complexes"];
+  const adminSlug = DASHBOARD_ROOT_SLUG_TO_ADMIN_SLUG[dashboardPath[0]];
+  const resolved = await resolveTableByPath([adminSlug]);
+
+  if (!resolved) {
+    notFound();
+  }
+
+  const childTablesByCell = await getChildTablesByCell(resolved.table.id);
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Əmlak kompleksləri</h1>
+        <h1 className={styles.title}>{resolved.table.title}</h1>
       </div>
-      <PropertyComplexesTable complexes={MOCK_PROPERTY_COMPLEXES} />
+      <PublicTableView
+        table={resolved.table}
+        dashboardPath={dashboardPath}
+        childTablesByCell={childTablesByCell}
+      />
     </div>
   );
 }

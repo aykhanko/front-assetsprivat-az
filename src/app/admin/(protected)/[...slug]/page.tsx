@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AdminTableView } from "@/features/admin-tables/components/AdminTableView";
 import {
-  getChildTablesByRow,
+  getChildTablesByCell,
   resolveTableByPath,
 } from "@/features/admin-tables/services/admin-table.service";
 
@@ -31,14 +31,14 @@ export default async function AdminTablePage({ params }: AdminTablePageProps) {
     notFound();
   }
 
-  const childTablesByRowId = await getChildTablesByRow(resolved.table.id);
+  const childTablesByCell = await getChildTablesByCell(resolved.table.id);
 
   return (
     <AdminTableView
       initialTable={resolved.table}
       breadcrumbs={resolved.breadcrumbs}
       path={resolved.path}
-      initialChildTablesByRowId={childTablesByRowId}
+      initialChildTablesByCell={childTablesByCell}
     />
   );
 }

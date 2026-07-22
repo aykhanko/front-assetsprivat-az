@@ -37,7 +37,7 @@ Fayl: `src/features/admin-tables/services/providers/api-admin-table.provider.ts`
 |---|---|---|---|---|
 | Slug zənciri ilə cədvəl tapmaq | `resolveTableByPathWithMockProvider(path)` | `GET /api/admin/tables/resolve?path=muessiseler/muessise-haqqinda` | query: slug path | `{ table, breadcrumbs, path } \| null` |
 | Root cədvəllərin siyahısı | `getRootTablesWithMockProvider()` | `GET /api/admin/tables/roots` | — | `AdminTable[]` |
-| Sətirlərə görə qruplaşdırılmış alt cədvəllər | `getChildTablesByRowWithMockProvider(tableId)` | `GET /api/admin/tables/:tableId/children-by-row` | — | `Record<rowId, ChildTableSummary[]>` |
+| Sətir+sütuna (hüceyrəyə) görə qruplaşdırılmış alt cədvəllər | `getChildTablesByCellWithMockProvider(tableId)` | `GET /api/admin/tables/:tableId/children-by-cell` | — | `Record<rowId, Record<columnId, ChildTableSummary[]>>` |
 | Sütun əlavə etmək | `addColumnWithMockProvider()` | `POST /api/admin/tables/:tableId/columns` | `{ label, type }` | `AdminTable` |
 | Sütun adını dəyişmək | `renameColumnWithMockProvider()` | `PATCH /api/admin/tables/:tableId/columns/:columnId` | `{ label }` | `AdminTable` |
 | Sütunu silmək | `deleteColumnWithMockProvider()` | `DELETE /api/admin/tables/:tableId/columns/:columnId` | — | `AdminTable` |
@@ -45,7 +45,8 @@ Fayl: `src/features/admin-tables/services/providers/api-admin-table.provider.ts`
 | Hüceyrə dəyərini yeniləmək | `updateCellWithMockProvider()` | `PATCH /api/admin/tables/:tableId/rows/:rowId/cells/:columnId` | `{ value }` | `AdminTable` |
 | Sətri silmək (kaskad) | `deleteRowWithMockProvider()` | `DELETE /api/admin/tables/:tableId/rows/:rowId` | — | `AdminTable` |
 | Cədvəl başlığını dəyişmək | `renameTableWithMockProvider()` | `PATCH /api/admin/tables/:tableId` | `{ title }` | `AdminTable` |
-| Sətrə bağlı alt cədvəl yaratmaq | `createSubTableWithMockProvider()` | `POST /api/admin/tables/:tableId/rows/:rowId/sub-tables` | `{ title }` | `{ childTable: AdminTable }` |
+| Sətrin bir hüceyrəsinə bağlı alt cədvəl yaratmaq | `createSubTableWithMockProvider()` | `POST /api/admin/tables/:tableId/rows/:rowId/sub-tables` | `{ columnId, title }` | `{ childTable: AdminTable }` |
+| Alt cədvəli (və nəvələrini) silmək | `deleteSubTableWithMockProvider()` | `DELETE /api/admin/tables/:parentTableId/sub-tables/:childTableId` | — | `{ success: true }` |
 
 ### Data modeli (kontrakt dəyişməməlidir)
 
@@ -74,6 +75,10 @@ interface AdminTable {
   rows: AdminRow[];
   parentTableId: string | null;
   parentRowId: string | null;
+  // Bu cədvəlin valideyn sətrində hansı KONKRET hüceyrəyə (sütuna) bağlı
+  // olduğu; root üçün `null`. Alt cədvəl bütöv sətrə deyil, sətrin müəyyən
+  // bir data xanasına bağlanır.
+  parentCellColumnId: string | null;
   createdAt: string;
   updatedAt: string;
 }

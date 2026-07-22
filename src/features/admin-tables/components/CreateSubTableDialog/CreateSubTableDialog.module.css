@@ -10,9 +10,144 @@
   line-height: var(--line-height-normal);
 }
 
+.cellList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 260px;
+  overflow-y: auto;
+  border: var(--border-width) solid var(--surface-border);
+  padding: var(--space-2);
+}
+
+.cellOption {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  border: var(--border-width) solid transparent;
+}
+
+.cellOption:hover {
+  background-color: var(--background-muted);
+}
+
+.cellOptionSelected {
+  background-color: var(--color-blue-50);
+  border-color: var(--brand-secondary);
+}
+
+.radio {
+  margin-top: 3px;
+  accent-color: var(--brand-primary);
+}
+
+.cellOptionText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cellOptionLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.cellOptionValue {
+  font-size: var(--font-size-sm);
+  color: var(--foreground-muted);
+  word-break: break-word;
+}
+
+.emptyValue {
+  font-style: italic;
+  color: var(--color-gray-400);
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;
   gap: var(--space-3);
   padding-top: var(--space-2);
+}
+
+.existingList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background-color: var(--background-muted);
+  border: var(--border-width) solid var(--surface-border);
+}
+
+.existingListTitle {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.existingRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.existingLabel {
+  font-weight: var(--font-weight-medium);
+}
+
+.existingLink {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.existingDelete {
+  border: none;
+  background: transparent;
+  color: var(--color-red-600, #b91c1c);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  text-decoration: underline;
+}
+
+.inlineConfirm {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--foreground-muted);
+}
+
+.inlineConfirmYes,
+.inlineConfirmNo {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  text-decoration: underline;
+}
+
+.inlineConfirmYes {
+  color: var(--color-red-600, #b91c1c);
+}
+
+.autoTitle {
+  font-size: var(--font-size-sm);
+  color: var(--foreground);
+}
+
+.changeTitleButton {
+  border: none;
+  background: transparent;
+  color: var(--link-color);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  text-decoration: underline;
 }

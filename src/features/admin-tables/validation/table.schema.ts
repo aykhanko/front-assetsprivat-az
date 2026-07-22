@@ -55,10 +55,16 @@ export const renameTableSchema = z.object({
 export const createSubTableSchema = z.object({
   tableId: z.string().min(1),
   rowId: z.string().min(1),
+  columnId: z.string().min(1, "Hansı data üçün cədvəl yaradılacağı seçilməlidir"),
   title: z
     .string()
     .min(1, "Cədvəl adı tələb olunur")
     .max(MAX_TABLE_TITLE_LENGTH, "Cədvəl adı çox uzundur"),
+});
+
+export const deleteSubTableSchema = z.object({
+  parentTableId: z.string().min(1),
+  childTableId: z.string().min(1),
 });
 
 export type AddColumnInput = z.infer<typeof addColumnSchema>;
@@ -69,3 +75,4 @@ export type UpdateCellInput = z.infer<typeof updateCellSchema>;
 export type DeleteRowInput = z.infer<typeof deleteRowSchema>;
 export type RenameTableInput = z.infer<typeof renameTableSchema>;
 export type CreateSubTableInput = z.infer<typeof createSubTableSchema>;
+export type DeleteSubTableInput = z.infer<typeof deleteSubTableSchema>;

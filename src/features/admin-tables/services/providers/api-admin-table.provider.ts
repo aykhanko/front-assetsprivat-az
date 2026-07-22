@@ -4,6 +4,7 @@ import type {
   CreateSubTableInput,
   DeleteColumnInput,
   DeleteRowInput,
+  DeleteSubTableInput,
   RenameColumnInput,
   RenameTableInput,
   UpdateCellInput,
@@ -31,10 +32,10 @@ export async function getRootTablesWithApiProvider(): Promise<AdminTable[]> {
   return notImplemented("getRootTables");
 }
 
-export async function getChildTablesByRowWithApiProvider(
+export async function getChildTablesByCellWithApiProvider(
   _tableId: string
-): Promise<Record<string, ChildTableSummary[]>> {
-  return notImplemented("getChildTablesByRow");
+): Promise<Record<string, Record<string, ChildTableSummary[]>>> {
+  return notImplemented("getChildTablesByCell");
 }
 
 export async function addColumnWithApiProvider(
@@ -83,4 +84,10 @@ export async function createSubTableWithApiProvider(
   _input: CreateSubTableInput
 ): Promise<{ childTable: AdminTable }> {
   return notImplemented("createSubTable");
+}
+
+export async function deleteSubTableWithApiProvider(
+  _input: DeleteSubTableInput
+): Promise<void> {
+  return notImplemented("deleteSubTable");
 }

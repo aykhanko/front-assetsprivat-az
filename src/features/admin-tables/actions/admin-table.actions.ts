@@ -6,6 +6,7 @@ import {
   createSubTableSchema,
   deleteColumnSchema,
   deleteRowSchema,
+  deleteSubTableSchema,
   renameColumnSchema,
   renameTableSchema,
   addRowSchema,
@@ -17,6 +18,7 @@ import {
   createSubTable,
   deleteColumn,
   deleteRow,
+  deleteSubTable,
   renameColumn,
   renameTable,
   updateCell,
@@ -41,6 +43,11 @@ export interface CreateSubTableActionResult {
   success: boolean;
   message?: string;
   childTable?: AdminTable;
+}
+
+export interface DeleteSubTableActionResult {
+  success: boolean;
+  message?: string;
 }
 
 function toErrorMessage(error: unknown): string {
@@ -190,6 +197,24 @@ export async function createSubTableAction(
     const { childTable } = await createSubTable(parsed.data);
     revalidateAdmin();
     return { success: true, childTable };
+  } catch (error) {
+    return { success: false, message: toErrorMessage(error) };
+  }
+}
+
+export async function deleteSubTableAction(
+  input: unknown
+): Promise<DeleteSubTableActionResult> {
+  const parsed = deleteSubTableSchema.safeParse(input);
+
+  if (!parsed.success) {
+    return { success: false, message: parsed.error.issues[0]?.message };
+  }
+
+  try {
+    await deleteSubTable(parsed.data);
+    revalidateAdmin();
+    return { success: true };
   } catch (error) {
     return { success: false, message: toErrorMessage(error) };
   }

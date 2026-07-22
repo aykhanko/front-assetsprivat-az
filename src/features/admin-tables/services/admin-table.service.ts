@@ -6,6 +6,7 @@ import type {
   CreateSubTableInput,
   DeleteColumnInput,
   DeleteRowInput,
+  DeleteSubTableInput,
   RenameColumnInput,
   RenameTableInput,
   UpdateCellInput,
@@ -43,12 +44,12 @@ export async function getRootTables(): Promise<AdminTable[]> {
     : mockProvider.getRootTablesWithMockProvider();
 }
 
-export async function getChildTablesByRow(
+export async function getChildTablesByCell(
   tableId: string
-): Promise<Record<string, ChildTableSummary[]>> {
+): Promise<Record<string, Record<string, ChildTableSummary[]>>> {
   return isApiMode()
-    ? apiProvider.getChildTablesByRowWithApiProvider(tableId)
-    : mockProvider.getChildTablesByRowWithMockProvider(tableId);
+    ? apiProvider.getChildTablesByCellWithApiProvider(tableId)
+    : mockProvider.getChildTablesByCellWithMockProvider(tableId);
 }
 
 export async function addColumn(input: AddColumnInput): Promise<AdminTable> {
@@ -107,4 +108,10 @@ export async function createSubTable(
   return isApiMode()
     ? apiProvider.createSubTableWithApiProvider(input)
     : mockProvider.createSubTableWithMockProvider(input);
+}
+
+export async function deleteSubTable(input: DeleteSubTableInput): Promise<void> {
+  return isApiMode()
+    ? apiProvider.deleteSubTableWithApiProvider(input)
+    : mockProvider.deleteSubTableWithMockProvider(input);
 }

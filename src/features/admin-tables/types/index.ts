@@ -36,6 +36,12 @@ export interface AdminTable {
   parentTableId: string | null;
   /** Bu cədvəlin hansı valideyn sətrinə bağlı olduğu; root üçün `null`. */
   parentRowId: string | null;
+  /**
+   * Bu cədvəlin valideyn sətrində hansı KONKRET hüceyrəyə (sütuna) bağlı
+   * olduğu; root üçün `null`. Alt cədvəl bütöv sətrə deyil, sətrin müəyyən
+   * bir data xanasına bağlanır.
+   */
+  parentCellColumnId: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -58,3 +64,6 @@ export interface ChildTableSummary {
   slug: string;
   title: string;
 }
+
+/** Sətir ID -> Sütun ID -> həmin hüceyrəyə bağlı alt cədvəllər. */
+export type ChildTablesByCell = Record<string, Record<string, ChildTableSummary[]>>;

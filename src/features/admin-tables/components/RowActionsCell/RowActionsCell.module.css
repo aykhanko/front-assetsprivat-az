@@ -1,25 +1,7 @@
 .container {
   display: flex;
-  flex-direction: column;
   gap: var(--space-2);
   min-width: 160px;
-}
-
-.subTableList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.subTableLink {
-  color: var(--link-color);
-  text-decoration: underline;
-  font-size: var(--font-size-sm);
-}
-
-.buttonRow {
-  display: flex;
-  gap: var(--space-2);
 }
 
 .subTableButton {

@@ -101,8 +101,8 @@
       {
         "id": "enterprise-1",
         "values": {
-          "name": "",
-          "location": "",
+          "name": "aaalo",
+          "location": "test edirik",
           "address": "",
           "taxId": "",
           "previousParentCompany": "",
@@ -116,12 +116,12 @@
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
-        "updatedAt": "2026-01-01T00:00:00.000Z"
+        "updatedAt": "2026-07-22T20:12:49.291Z"
       },
       {
         "id": "enterprise-2",
         "values": {
-          "name": "",
+          "name": "welcome",
           "location": "",
           "address": "",
           "taxId": "",
@@ -136,7 +136,7 @@
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
-        "updatedAt": "2026-01-01T00:00:00.000Z"
+        "updatedAt": "2026-07-22T19:54:34.956Z"
       },
       {
         "id": "enterprise-3",
@@ -257,12 +257,32 @@
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
         "updatedAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "row-e972b99c-6da8-45b7-9c93-f94a8ee4fe0b",
+        "values": {
+          "name": "",
+          "location": "",
+          "address": "",
+          "taxId": "",
+          "previousParentCompany": "",
+          "charterCapital": "",
+          "landArea": "",
+          "buildingArea": "",
+          "privatizationDate": "",
+          "investorInfo": "",
+          "currentStatusAndIssues": "",
+          "mapLink": "",
+          "investmentCommitmentsAndStatus": ""
+        },
+        "createdAt": "2026-07-22T19:44:01.733Z",
+        "updatedAt": "2026-07-22T19:44:01.733Z"
       }
     ],
     "parentTableId": null,
     "parentRowId": null,
     "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
+    "updatedAt": "2026-07-22T20:12:49.291Z"
   },
   {
     "id": "root-property-complexes",
@@ -803,5 +823,51 @@
     "parentRowId": null,
     "createdAt": "2026-01-01T00:00:00.000Z",
     "updatedAt": "2026-07-22T19:39:52.814Z"
+  },
+  {
+    "id": "table-6ff80ac1-b538-4fa9-b74a-796392e71060",
+    "slug": "salam",
+    "title": "SALAM",
+    "columns": [
+      {
+        "id": "col-c680426e-9016-457f-a1b7-03708b717db1",
+        "key": "salam",
+        "label": "Salam",
+        "type": "text",
+        "order": 0
+      },
+      {
+        "id": "col-e0750f42-0a8e-4977-aff6-566dbd6018e1",
+        "key": "salam-2",
+        "label": "salam",
+        "type": "text",
+        "order": 1
+      }
+    ],
+    "rows": [],
+    "parentTableId": "root-enterprises",
+    "parentRowId": "enterprise-1",
+    "createdAt": "2026-07-22T19:41:49.386Z",
+    "updatedAt": "2026-07-22T19:42:12.975Z"
+  },
+  {
+    "id": "table-331a7f82-915a-40b4-9b31-ec9fb0d92b08",
+    "slug": "aaalo",
+    "title": "aaalo",
+    "columns": [
+      {
+        "id": "col-61ec6735-63d7-457f-a952-d2aed498d3b4",
+        "key": "agola",
+        "label": "agola",
+        "type": "text",
+        "order": 0
+      }
+    ],
+    "rows": [],
+    "parentTableId": "root-enterprises",
+    "parentRowId": "enterprise-1",
+    "parentCellColumnId": "col-name",
+    "createdAt": "2026-07-22T20:12:09.597Z",
+    "updatedAt": "2026-07-22T20:12:14.072Z"
   }
 ]

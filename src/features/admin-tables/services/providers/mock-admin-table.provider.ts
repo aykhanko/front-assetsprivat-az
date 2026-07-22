@@ -7,6 +7,7 @@ import type {
   CreateSubTableInput,
   DeleteColumnInput,
   DeleteRowInput,
+  DeleteSubTableInput,
   RenameColumnInput,
   RenameTableInput,
   UpdateCellInput,
@@ -79,20 +80,22 @@ export async function getRootTablesWithMockProvider(): Promise<AdminTable[]> {
   return repository.findRootTables();
 }
 
-export async function getChildTablesByRowWithMockProvider(
+export async function getChildTablesByCellWithMockProvider(
   tableId: string
-): Promise<Record<string, ChildTableSummary[]>> {
+): Promise<Record<string, Record<string, ChildTableSummary[]>>> {
   const children = await repository.findChildTables(tableId);
-  const grouped: Record<string, ChildTableSummary[]> = {};
+  const grouped: Record<string, Record<string, ChildTableSummary[]>> = {};
 
   for (const child of children) {
-    if (!child.parentRowId) {
+    if (!child.parentRowId || !child.parentCellColumnId) {
       continue;
     }
 
-    const list = grouped[child.parentRowId] ?? [];
+    const byColumn = grouped[child.parentRowId] ?? {};
+    const list = byColumn[child.parentCellColumnId] ?? [];
     list.push(toChildSummary(child));
-    grouped[child.parentRowId] = list;
+    byColumn[child.parentCellColumnId] = list;
+    grouped[child.parentRowId] = byColumn;
   }
 
   return grouped;
@@ -151,6 +154,25 @@ export async function renameColumnWithMockProvider({
   return repository.replaceTable(updated);
 }
 
+async function collectDescendantTableIdsOf(tableIds: string[]): Promise<string[]> {
+  const idsToDelete: string[] = [];
+
+  async function collectChildrenOf(parentTableId: string): Promise<void> {
+    const children = await repository.findChildTables(parentTableId);
+
+    for (const child of children) {
+      idsToDelete.push(child.id);
+      await collectChildrenOf(child.id);
+    }
+  }
+
+  for (const tableId of tableIds) {
+    await collectChildrenOf(tableId);
+  }
+
+  return idsToDelete;
+}
+
 export async function deleteColumnWithMockProvider({
   tableId,
   columnId,
@@ -160,6 +182,18 @@ export async function deleteColumnWithMockProvider({
 
   if (!columnToDelete) {
     throw new Error("Sütun tapılmadı.");
+  }
+
+  const directSubTables = await repository.findChildTablesForColumn(
+    tableId,
+    columnId
+  );
+  const directSubTableIds = directSubTables.map((sub) => sub.id);
+  const descendantIds = await collectDescendantTableIdsOf(directSubTableIds);
+  const idsToDelete = [...directSubTableIds, ...descendantIds];
+
+  if (idsToDelete.length > 0) {
+    await repository.deleteTablesByIds(idsToDelete);
   }
 
   const updated = touch({
@@ -222,40 +256,19 @@ export async function updateCellWithMockProvider({
   return repository.replaceTable(updated);
 }
 
-async function collectDescendantTableIds(
-  tableId: string,
-  rowId: string
-): Promise<string[]> {
-  const idsToDelete: string[] = [];
-
-  async function collectChildrenOf(parentTableId: string): Promise<void> {
-    const children = await repository.findChildTables(parentTableId);
-
-    for (const child of children) {
-      idsToDelete.push(child.id);
-      await collectChildrenOf(child.id);
-    }
-  }
-
-  const directChildren = await repository.findChildTablesForRow(tableId, rowId);
-
-  for (const child of directChildren) {
-    idsToDelete.push(child.id);
-    await collectChildrenOf(child.id);
-  }
-
-  return idsToDelete;
-}
-
 export async function deleteRowWithMockProvider({
   tableId,
   rowId,
 }: DeleteRowInput): Promise<AdminTable> {
   const table = await requireTable(tableId);
 
-  const descendantIds = await collectDescendantTableIds(tableId, rowId);
-  if (descendantIds.length > 0) {
-    await repository.deleteTablesByIds(descendantIds);
+  const directChildren = await repository.findChildTablesForRow(tableId, rowId);
+  const directChildIds = directChildren.map((child) => child.id);
+  const descendantIds = await collectDescendantTableIdsOf(directChildIds);
+  const idsToDelete = [...directChildIds, ...descendantIds];
+
+  if (idsToDelete.length > 0) {
+    await repository.deleteTablesByIds(idsToDelete);
   }
 
   const updated = touch({
@@ -278,9 +291,20 @@ export async function renameTableWithMockProvider({
 export async function createSubTableWithMockProvider({
   tableId,
   rowId,
+  columnId,
   title,
 }: CreateSubTableInput): Promise<{ childTable: AdminTable }> {
-  await requireTable(tableId);
+  const table = await requireTable(tableId);
+
+  const row = table.rows.find((item) => item.id === rowId);
+  if (!row) {
+    throw new Error("Sətir tapılmadı.");
+  }
+
+  const column = table.columns.find((item) => item.id === columnId);
+  if (!column) {
+    throw new Error("Sütun tapılmadı.");
+  }
 
   const siblingTables = await repository.findChildTables(tableId);
   const slug = ensureUniqueSlug(
@@ -297,10 +321,25 @@ export async function createSubTableWithMockProvider({
     rows: [],
     parentTableId: tableId,
     parentRowId: rowId,
+    parentCellColumnId: columnId,
     createdAt: now,
     updatedAt: now,
   };
 
   await repository.insertTable(childTable);
   return { childTable };
+}
+
+export async function deleteSubTableWithMockProvider({
+  parentTableId,
+  childTableId,
+}: DeleteSubTableInput): Promise<void> {
+  const childTable = await repository.findTableById(childTableId);
+
+  if (!childTable || childTable.parentTableId !== parentTableId) {
+    throw new Error("Alt cədvəl tapılmadı.");
+  }
+
+  const descendantIds = await collectDescendantTableIdsOf([childTableId]);
+  await repository.deleteTablesByIds([childTableId, ...descendantIds]);
 }

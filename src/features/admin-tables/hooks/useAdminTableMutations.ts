@@ -7,15 +7,18 @@ import {
   createSubTableAction,
   deleteColumnAction,
   deleteRowAction,
+  deleteSubTableAction,
   renameColumnAction,
   renameTableAction,
   updateCellAction,
 } from "../actions/admin-table.actions";
-import type { AdminColumnType, AdminTable, ChildTableSummary } from "../types";
+import type { AdminColumnType, AdminTable, ChildTablesByCell } from "../types";
+
+export type { ChildTablesByCell } from "../types";
 
 export interface UseAdminTableMutationsOptions {
   initialTable: AdminTable;
-  initialChildTablesByRowId: Record<string, ChildTableSummary[]>;
+  initialChildTablesByCell: ChildTablesByCell;
 }
 
 /**
@@ -26,11 +29,11 @@ export interface UseAdminTableMutationsOptions {
  */
 export function useAdminTableMutations({
   initialTable,
-  initialChildTablesByRowId,
+  initialChildTablesByCell,
 }: UseAdminTableMutationsOptions) {
   const [table, setTable] = useState(initialTable);
-  const [childTablesByRowId, setChildTablesByRowId] = useState(
-    initialChildTablesByRowId
+  const [childTablesByCell, setChildTablesByCell] = useState<ChildTablesByCell>(
+    initialChildTablesByCell
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -77,6 +80,15 @@ export function useAdminTableMutations({
         const result = await deleteColumnAction({ tableId: table.id, columnId });
         if (result.success && result.table) {
           setTable(result.table);
+          setChildTablesByCell((prev) => {
+            const next: ChildTablesByCell = {};
+            for (const [rowId, byColumn] of Object.entries(prev)) {
+              const nextByColumn = { ...byColumn };
+              delete nextByColumn[columnId];
+              next[rowId] = nextByColumn;
+            }
+            return next;
+          });
           setErrorMessage(null);
         } else {
           setErrorMessage(result.message ?? "Sütun silinə bilmədi.");
@@ -124,7 +136,7 @@ export function useAdminTableMutations({
         const result = await deleteRowAction({ tableId: table.id, rowId });
         if (result.success && result.table) {
           setTable(result.table);
-          setChildTablesByRowId((prev) => {
+          setChildTablesByCell((prev) => {
             const next = { ...prev };
             delete next[rowId];
             return next;
@@ -154,18 +166,28 @@ export function useAdminTableMutations({
   );
 
   const createSubTable = useCallback(
-    (rowId: string, title: string, onCreated?: (childTable: AdminTable) => void) => {
+    (
+      rowId: string,
+      columnId: string,
+      title: string,
+      onCreated?: (childTable: AdminTable) => void
+    ) => {
       startTransition(async () => {
         const result = await createSubTableAction({
           tableId: table.id,
           rowId,
+          columnId,
           title,
         });
         if (result.success && result.childTable) {
-          setChildTablesByRowId((prev) => ({
-            ...prev,
-            [rowId]: [...(prev[rowId] ?? []), result.childTable!],
-          }));
+          setChildTablesByCell((prev) => {
+            const byColumn = prev[rowId] ?? {};
+            const list = byColumn[columnId] ?? [];
+            return {
+              ...prev,
+              [rowId]: { ...byColumn, [columnId]: [...list, result.childTable!] },
+            };
+          });
           setErrorMessage(null);
           onCreated?.(result.childTable);
         } else {
@@ -176,9 +198,33 @@ export function useAdminTableMutations({
     [table.id]
   );
 
+  const deleteSubTable = useCallback(
+    (rowId: string, columnId: string, childTableId: string) => {
+      startTransition(async () => {
+        const result = await deleteSubTableAction({
+          parentTableId: table.id,
+          childTableId,
+        });
+        if (result.success) {
+          setChildTablesByCell((prev) => {
+            const byColumn = prev[rowId] ?? {};
+            const list = (byColumn[columnId] ?? []).filter(
+              (child) => child.id !== childTableId
+            );
+            return { ...prev, [rowId]: { ...byColumn, [columnId]: list } };
+          });
+          setErrorMessage(null);
+        } else {
+          setErrorMessage(result.message ?? "Alt cədvəl silinə bilmədi.");
+        }
+      });
+    },
+    [table.id]
+  );
+
   return {
     table,
-    childTablesByRowId,
+    childTablesByCell,
     errorMessage,
     isPending,
     clearError,
@@ -190,5 +236,6 @@ export function useAdminTableMutations({
     deleteRow,
     renameTable,
     createSubTable,
+    deleteSubTable,
   };
 }

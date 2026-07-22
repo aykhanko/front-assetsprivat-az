@@ -44,6 +44,7 @@ function buildRootTable(
     rows,
     parentTableId: null,
     parentRowId: null,
+    parentCellColumnId: null,
     createdAt: SEED_TIMESTAMP,
     updatedAt: SEED_TIMESTAMP,
   };

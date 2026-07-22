@@ -9,7 +9,7 @@
 
 .table {
   width: 100%;
-  min-width: 1900px;
+  min-width: 1200px;
   border-collapse: collapse;
   font-size: var(--font-size-sm);
 }
@@ -55,4 +55,31 @@
   color: var(--link-color);
   text-decoration: underline;
   cursor: default;
+}
+
+.filePlaceholder {
+  color: var(--foreground-muted);
+  font-style: italic;
+}
+
+.emptyState,
+.emptyRow {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--foreground-muted);
+  background-color: var(--surface);
+  border: var(--border-width) solid var(--surface-border);
+}
+
+.subTableValue {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  color: var(--brand-secondary, var(--link-color));
+  text-decoration: underline;
+  font-weight: var(--font-weight-medium);
+}
+
+.subTableIcon {
+  flex-shrink: 0;
 }
