@@ -7,6 +7,7 @@ import { Button } from "@/components/ui";
 import { useAdminTableMutations } from "../../hooks/useAdminTableMutations";
 import type { ChildTablesByCell } from "../../hooks/useAdminTableMutations";
 import { AddColumnDialog } from "../AddColumnDialog";
+import { AllSubTablesDialog } from "../AllSubTablesDialog";
 import { ColumnMenu } from "../ColumnMenu";
 import { ConfirmDialog } from "../ConfirmDialog";
 import { EditableCell, type CellNavigationDirection } from "../EditableCell";
@@ -58,6 +59,7 @@ export function AdminTableView({
   } = useAdminTableMutations({ initialTable, initialChildTablesByCell });
 
   const [isAddColumnOpen, setIsAddColumnOpen] = useState(false);
+  const [isAllSubTablesOpen, setIsAllSubTablesOpen] = useState(false);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleDraft, setTitleDraft] = useState(table.title);
   const [activeCell, setActiveCell] = useState<ActiveCell | null>(null);
@@ -136,6 +138,13 @@ export function AdminTableView({
     setActiveCell(getAdjacentCell(current, direction));
   };
 
+  const subTableCount = Object.values(childTablesByCell).reduce(
+    (total, byColumn) =>
+      total +
+      Object.values(byColumn).reduce((sum, children) => sum + children.length, 0),
+    0
+  );
+
   return (
     <div className={styles.page}>
       <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
@@ -183,6 +192,16 @@ export function AdminTableView({
         )}
 
         <div className={styles.toolbar}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setIsAllSubTablesOpen(true)}
+          >
+            🗂 Bütün alt cədvəllər
+            {subTableCount > 0 ? (
+              <span className={styles.subTableCountBadge}>{subTableCount}</span>
+            ) : null}
+          </Button>
           <Button
             type="button"
             variant="outline"
@@ -338,6 +357,14 @@ export function AdminTableView({
           setIsAddColumnOpen(false);
         }}
         onCancel={() => setIsAddColumnOpen(false)}
+      />
+
+      <AllSubTablesDialog
+        isOpen={isAllSubTablesOpen}
+        table={table}
+        path={path}
+        childTablesByCell={childTablesByCell}
+        onClose={() => setIsAllSubTablesOpen(false)}
       />
 
       <ConfirmDialog

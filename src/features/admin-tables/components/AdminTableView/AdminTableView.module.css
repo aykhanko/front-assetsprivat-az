@@ -68,6 +68,21 @@
   display: flex;
   gap: var(--space-3);
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.subTableCountBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--space-2);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background-color: var(--color-accent-gold, var(--brand-primary-strong));
+  color: var(--color-navy-900, var(--foreground));
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
 .errorBanner {

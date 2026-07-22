@@ -1,0 +1,76 @@
+.emptyMessage {
+  color: var(--foreground-muted);
+  font-size: var(--font-size-sm);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background-color: var(--background-muted);
+  border: var(--border-width) solid var(--surface-border);
+}
+
+.entryInfo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  font-size: var(--font-size-sm);
+}
+
+.entryBadge {
+  flex-shrink: 0;
+  padding: 1px var(--space-2);
+  background-color: var(--brand-primary-strong);
+  color: var(--text-on-brand);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.entryColumn {
+  flex-shrink: 0;
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground-muted);
+}
+
+.entryValue {
+  color: var(--foreground);
+  word-break: break-word;
+}
+
+.entryArrow {
+  color: var(--color-gray-400);
+  flex-shrink: 0;
+}
+
+.entryTitle {
+  font-weight: var(--font-weight-semibold);
+  color: var(--brand-secondary, var(--link-color));
+  word-break: break-word;
+}
+
+.goButton {
+  flex-shrink: 0;
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--brand-primary-strong);
+  color: var(--text-on-brand);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+.goButton:hover {
+  background-color: var(--brand-primary, var(--brand-primary-strong));
+}

@@ -257,32 +257,12 @@
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
         "updatedAt": "2026-01-01T00:00:00.000Z"
-      },
-      {
-        "id": "row-e972b99c-6da8-45b7-9c93-f94a8ee4fe0b",
-        "values": {
-          "name": "",
-          "location": "",
-          "address": "",
-          "taxId": "",
-          "previousParentCompany": "",
-          "charterCapital": "",
-          "landArea": "",
-          "buildingArea": "",
-          "privatizationDate": "",
-          "investorInfo": "",
-          "currentStatusAndIssues": "",
-          "mapLink": "",
-          "investmentCommitmentsAndStatus": ""
-        },
-        "createdAt": "2026-07-22T19:44:01.733Z",
-        "updatedAt": "2026-07-22T19:44:01.733Z"
       }
     ],
     "parentTableId": null,
     "parentRowId": null,
     "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-07-22T20:12:49.291Z"
+    "updatedAt": "2026-07-22T20:22:08.193Z"
   },
   {
     "id": "root-property-complexes",
@@ -513,7 +493,7 @@
     "id": "root-land-plots",
     "slug": "torpaq-saheleri",
     "title": "Torpaq sahələri",
-    "description": "Torpaq sahələrinin özəlləşdirilməsi üzrə qeydiyyat",
+    "description": "",
     "columns": [
       {
         "id": "col-objectName",
@@ -863,11 +843,57 @@
         "order": 0
       }
     ],
-    "rows": [],
+    "rows": [
+      {
+        "id": "row-f49cbb86-e7af-48dd-878f-b71b12760b9b",
+        "values": {
+          "agola": "saaaalam"
+        },
+        "createdAt": "2026-07-22T20:24:25.975Z",
+        "updatedAt": "2026-07-22T20:24:30.112Z"
+      }
+    ],
     "parentTableId": "root-enterprises",
     "parentRowId": "enterprise-1",
     "parentCellColumnId": "col-name",
     "createdAt": "2026-07-22T20:12:09.597Z",
-    "updatedAt": "2026-07-22T20:12:14.072Z"
+    "updatedAt": "2026-07-22T20:24:30.112Z"
+  },
+  {
+    "id": "table-8f865cef-d1aa-41a7-b871-c175f0ec68c4",
+    "slug": "saaaalam",
+    "title": "saaaalam",
+    "columns": [
+      {
+        "id": "col-de6d9a0b-0f02-45a9-8120-e042816a1ca1",
+        "key": "qaqa",
+        "label": "qaqa",
+        "type": "text",
+        "order": 0
+      }
+    ],
+    "rows": [
+      {
+        "id": "row-7b474a8c-3da3-47e7-8c71-257caf7dccd2",
+        "values": {
+          "qaqa": "3cu alt"
+        },
+        "createdAt": "2026-07-22T20:24:43.491Z",
+        "updatedAt": "2026-07-22T20:24:55.554Z"
+      },
+      {
+        "id": "row-7d36473c-f187-4442-8585-88b2e6988720",
+        "values": {
+          "qaqa": "sagol"
+        },
+        "createdAt": "2026-07-22T20:24:48.331Z",
+        "updatedAt": "2026-07-22T20:24:50.817Z"
+      }
+    ],
+    "parentTableId": "table-331a7f82-915a-40b4-9b31-ec9fb0d92b08",
+    "parentRowId": "row-f49cbb86-e7af-48dd-878f-b71b12760b9b",
+    "parentCellColumnId": "col-61ec6735-63d7-457f-a952-d2aed498d3b4",
+    "createdAt": "2026-07-22T20:24:36.102Z",
+    "updatedAt": "2026-07-22T20:24:55.554Z"
   }
 ]
