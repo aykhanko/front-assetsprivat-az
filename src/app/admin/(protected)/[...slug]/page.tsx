@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { AdminTableView } from "@/features/admin-tables/components/AdminTableView";
 import {
   getChildTablesByCell,
+  getDescendantSubTables,
   resolveTableByPath,
 } from "@/features/admin-tables/services/admin-table.service";
 
@@ -31,7 +32,10 @@ export default async function AdminTablePage({ params }: AdminTablePageProps) {
     notFound();
   }
 
-  const childTablesByCell = await getChildTablesByCell(resolved.table.id);
+  const [childTablesByCell, descendantSubTables] = await Promise.all([
+    getChildTablesByCell(resolved.table.id),
+    getDescendantSubTables(resolved.table.id),
+  ]);
 
   return (
     <AdminTableView
@@ -39,6 +43,7 @@ export default async function AdminTablePage({ params }: AdminTablePageProps) {
       breadcrumbs={resolved.breadcrumbs}
       path={resolved.path}
       initialChildTablesByCell={childTablesByCell}
+      initialDescendantSubTables={descendantSubTables}
     />
   );
 }

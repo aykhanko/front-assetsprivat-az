@@ -14,6 +14,7 @@ import type {
 import type {
   AdminTable,
   ChildTableSummary,
+  DescendantSubTableSummary,
   ResolvedAdminTable,
 } from "../types";
 import * as mockProvider from "./providers/mock-admin-table.provider";
@@ -50,6 +51,14 @@ export async function getChildTablesByCell(
   return isApiMode()
     ? apiProvider.getChildTablesByCellWithApiProvider(tableId)
     : mockProvider.getChildTablesByCellWithMockProvider(tableId);
+}
+
+export async function getDescendantSubTables(
+  tableId: string
+): Promise<DescendantSubTableSummary[]> {
+  return isApiMode()
+    ? apiProvider.getDescendantSubTablesWithApiProvider(tableId)
+    : mockProvider.getDescendantSubTablesWithMockProvider(tableId);
 }
 
 export async function addColumn(input: AddColumnInput): Promise<AdminTable> {

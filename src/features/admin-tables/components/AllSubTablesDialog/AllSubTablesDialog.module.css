@@ -30,6 +30,12 @@
   font-size: var(--font-size-sm);
 }
 
+.entryParent {
+  flex-basis: 100%;
+  font-size: var(--font-size-xs);
+  color: var(--foreground-muted);
+}
+
 .entryBadge {
   flex-shrink: 0;
   padding: 1px var(--space-2);

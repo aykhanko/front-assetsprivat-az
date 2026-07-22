@@ -5,35 +5,23 @@
   min-height: 22px;
 }
 
-.textValue,
-.linkValue {
+.textValue {
   display: block;
   width: 100%;
   min-height: 20px;
   cursor: text;
   white-space: pre-wrap;
   word-break: break-word;
-}
-
-.linkValue {
-  color: var(--link-color);
-  text-decoration: underline;
+  color: var(--foreground);
 }
 
 .subTableValue {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: var(--space-1);
+  display: block;
   width: 100%;
-  color: var(--brand-secondary, var(--link-color));
+  color: var(--link-color);
   text-decoration: underline;
-  font-weight: var(--font-weight-medium);
   white-space: pre-wrap;
   word-break: break-word;
-}
-
-.subTableIcon {
-  flex-shrink: 0;
 }
 
 .editIconButton {
@@ -83,40 +71,4 @@
 
 .input:focus-visible {
   outline: none;
-}
-
-.fileModeRow {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  width: 100%;
-}
-
-.fileModeToggle {
-  display: flex;
-  gap: 2px;
-}
-
-.fileModeButton {
-  padding: 2px var(--space-2);
-  font-size: var(--font-size-xs);
-  color: var(--foreground-muted);
-  background-color: var(--background-muted);
-  border: 1px solid var(--surface-border);
-  cursor: pointer;
-}
-
-.fileModeButtonActive {
-  color: var(--text-on-brand);
-  background-color: var(--brand-primary-strong);
-  border-color: var(--brand-primary-strong);
-}
-
-.uploadPlaceholder {
-  padding: var(--space-1) var(--space-2);
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-500);
-  border: 1px dashed var(--color-gray-300);
-  cursor: not-allowed;
-  align-self: flex-start;
 }

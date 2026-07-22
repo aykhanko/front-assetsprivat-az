@@ -67,3 +67,20 @@ export interface ChildTableSummary {
 
 /** Sətir ID -> Sütun ID -> həmin hüceyrəyə bağlı alt cədvəllər. */
 export type ChildTablesByCell = Record<string, Record<string, ChildTableSummary[]>>;
+
+/**
+ * Cari cədvəldən başlayaraq istənilən dərinlikdəki (nəvə daxil) alt
+ * cədvəlin yüngül təsviri — "Bütün alt cədvəllər" dialoqu üçün.
+ */
+export interface DescendantSubTableSummary {
+  id: string;
+  slug: string;
+  title: string;
+  /** Cari cədvəldən bu alt cədvələ qədər slug zənciri. */
+  relativePath: string[];
+  depth: number;
+  parentTableTitle: string;
+  rowNumber: number;
+  columnLabel: string;
+  cellValue: string;
+}

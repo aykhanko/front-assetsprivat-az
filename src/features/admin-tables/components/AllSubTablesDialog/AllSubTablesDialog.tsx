@@ -2,19 +2,31 @@
 
 import Link from "next/link";
 import { Modal } from "@/components/ui";
-import type { AdminTable, ChildTablesByCell } from "../../types";
+import type {
+  AdminTable,
+  ChildTablesByCell,
+  DescendantSubTableSummary,
+} from "../../types";
 import styles from "./AllSubTablesDialog.module.css";
+
+export type SubTablesDialogMode = "direct" | "all";
 
 export interface AllSubTablesDialogProps {
   isOpen: boolean;
+  mode: SubTablesDialogMode;
   table: AdminTable;
   path: string[];
+  /** Yalnız cari cədvəlin birbaşa alt cədvəlləri. */
   childTablesByCell: ChildTablesByCell;
+  /** Cari cədvəldən bütün dərinlikdəki alt cədvəllər (nəvələr daxil). */
+  descendantSubTables: DescendantSubTableSummary[];
   onClose: () => void;
 }
 
 interface SubTableEntry {
   key: string;
+  depth: number;
+  parentTableTitle?: string;
   rowNumber: number;
   columnLabel: string;
   cellValue: string;
@@ -22,18 +34,11 @@ interface SubTableEntry {
   href: string;
 }
 
-/**
- * Cari cədvəldəki (istənilən sətir/hüceyrə üzrə) BÜTÜN alt cədvəlləri tək
- * yerdə göstərir — hansı box-un (sətir + sütun) hansı alt cədvələ bağlı
- * olduğunu aydın edir və birbaşa həmin cədvələ keçidi təmin edir.
- */
-export function AllSubTablesDialog({
-  isOpen,
-  table,
-  path,
-  childTablesByCell,
-  onClose,
-}: AllSubTablesDialogProps) {
+function buildDirectEntries(
+  table: AdminTable,
+  path: string[],
+  childTablesByCell: ChildTablesByCell
+): SubTableEntry[] {
   const entries: SubTableEntry[] = [];
 
   table.rows.forEach((row, rowIndex) => {
@@ -47,6 +52,7 @@ export function AllSubTablesDialog({
       children.forEach((child) => {
         entries.push({
           key: child.id,
+          depth: 1,
           rowNumber: rowIndex + 1,
           columnLabel: column.label,
           cellValue: row.values[column.key] ?? "",
@@ -57,17 +63,69 @@ export function AllSubTablesDialog({
     });
   });
 
+  return entries;
+}
+
+function buildAllEntries(
+  path: string[],
+  descendants: DescendantSubTableSummary[]
+): SubTableEntry[] {
+  return descendants.map((item) => ({
+    key: item.id,
+    depth: item.depth,
+    parentTableTitle: item.parentTableTitle,
+    rowNumber: item.rowNumber,
+    columnLabel: item.columnLabel,
+    cellValue: item.cellValue,
+    childTitle: item.title,
+    href: `/admin/${[...path, ...item.relativePath].join("/")}`,
+  }));
+}
+
+/**
+ * Alt cədvəl siyahısı dialoqu.
+ *
+ * - `direct`: yalnız bu cədvəlin birbaşa alt cədvəlləri
+ * - `all`: bu cədvəldən başlayan bütün dərinlikdəki alt cədvəllər
+ */
+export function AllSubTablesDialog({
+  isOpen,
+  mode,
+  table,
+  path,
+  childTablesByCell,
+  descendantSubTables,
+  onClose,
+}: AllSubTablesDialogProps) {
+  const entries =
+    mode === "all"
+      ? buildAllEntries(path, descendantSubTables)
+      : buildDirectEntries(table, path, childTablesByCell);
+
+  const title = mode === "all" ? "Bütün alt cədvəllər" : "Alt cədvəllər";
+  const emptyMessage =
+    mode === "all"
+      ? "Bu cədvəldə və onun alt cədvəllərində hələ heç bir alt cədvəl yoxdur."
+      : "Bu cədvəldə hələ heç bir alt cədvəl yaradılmayıb.";
+
   return (
-    <Modal isOpen={isOpen} title="Bütün alt cədvəllər" onClose={onClose}>
+    <Modal isOpen={isOpen} title={title} onClose={onClose}>
       {entries.length === 0 ? (
-        <p className={styles.emptyMessage}>
-          Bu cədvəldə hələ heç bir alt cədvəl yaradılmayıb.
-        </p>
+        <p className={styles.emptyMessage}>{emptyMessage}</p>
       ) : (
         <div className={styles.list}>
           {entries.map((entry) => (
-            <div key={entry.key} className={styles.entry}>
+            <div
+              key={entry.key}
+              className={styles.entry}
+              style={{ marginLeft: `${(entry.depth - 1) * 12}px` }}
+            >
               <div className={styles.entryInfo}>
+                {mode === "all" && entry.parentTableTitle ? (
+                  <span className={styles.entryParent}>
+                    {entry.parentTableTitle}
+                  </span>
+                ) : null}
                 <span className={styles.entryBadge}>#{entry.rowNumber}</span>
                 <span className={styles.entryColumn}>{entry.columnLabel}</span>
                 <span className={styles.entryValue}>
@@ -78,7 +136,11 @@ export function AllSubTablesDialog({
                 </span>
                 <span className={styles.entryTitle}>{entry.childTitle}</span>
               </div>
-              <Link href={entry.href} className={styles.goButton} onClick={onClose}>
+              <Link
+                href={entry.href}
+                className={styles.goButton}
+                onClick={onClose}
+              >
                 Keç
               </Link>
             </div>

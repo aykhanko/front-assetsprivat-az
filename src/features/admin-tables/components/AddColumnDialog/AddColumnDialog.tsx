@@ -2,14 +2,12 @@
 
 import { FormEvent, useState } from "react";
 import { Button, FormField, Input, Modal } from "@/components/ui";
-import { COLUMN_TYPE_OPTIONS } from "../../constants";
-import type { AdminColumnType } from "../../types";
 import styles from "./AddColumnDialog.module.css";
 
 export interface AddColumnDialogProps {
   isOpen: boolean;
   isPending?: boolean;
-  onSubmit: (label: string, type: AdminColumnType) => void;
+  onSubmit: (label: string) => void;
   onCancel: () => void;
 }
 
@@ -20,11 +18,9 @@ export function AddColumnDialog({
   onCancel,
 }: AddColumnDialogProps) {
   const [label, setLabel] = useState("");
-  const [type, setType] = useState<AdminColumnType>("text");
 
   const handleClose = () => {
     setLabel("");
-    setType("text");
     onCancel();
   };
 
@@ -33,9 +29,8 @@ export function AddColumnDialog({
     if (!label.trim()) {
       return;
     }
-    onSubmit(label.trim(), type);
+    onSubmit(label.trim());
     setLabel("");
-    setType("text");
   };
 
   return (
@@ -49,21 +44,6 @@ export function AddColumnDialog({
             placeholder="Məsələn: Əlaqə nömrəsi"
             autoFocus
           />
-        </FormField>
-
-        <FormField id="new-column-type" label="Sütun tipi" required>
-          <select
-            id="new-column-type"
-            className={styles.select}
-            value={type}
-            onChange={(event) => setType(event.target.value as AdminColumnType)}
-          >
-            {COLUMN_TYPE_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
         </FormField>
 
         <div className={styles.actions}>

@@ -56,6 +56,7 @@ function toErrorMessage(error: unknown): string {
 
 function revalidateAdmin(): void {
   revalidatePath("/admin", "layout");
+  revalidatePath("/dashboard", "layout");
 }
 
 export async function addColumnAction(

@@ -38,7 +38,8 @@ Fayl: `src/features/admin-tables/services/providers/api-admin-table.provider.ts`
 | Slug zənciri ilə cədvəl tapmaq | `resolveTableByPathWithMockProvider(path)` | `GET /api/admin/tables/resolve?path=muessiseler/muessise-haqqinda` | query: slug path | `{ table, breadcrumbs, path } \| null` |
 | Root cədvəllərin siyahısı | `getRootTablesWithMockProvider()` | `GET /api/admin/tables/roots` | — | `AdminTable[]` |
 | Sətir+sütuna (hüceyrəyə) görə qruplaşdırılmış alt cədvəllər | `getChildTablesByCellWithMockProvider(tableId)` | `GET /api/admin/tables/:tableId/children-by-cell` | — | `Record<rowId, Record<columnId, ChildTableSummary[]>>` |
-| Sütun əlavə etmək | `addColumnWithMockProvider()` | `POST /api/admin/tables/:tableId/columns` | `{ label, type }` | `AdminTable` |
+| Bütün dərinlikdəki alt cədvəllər (nəvələr daxil) | `getDescendantSubTablesWithMockProvider(tableId)` | `GET /api/admin/tables/:tableId/descendants` | — | `DescendantSubTableSummary[]` |
+| Sütun əlavə etmək | `addColumnWithMockProvider()` | `POST /api/admin/tables/:tableId/columns` | `{ label }` (type optional, default `text`) | `AdminTable` |
 | Sütun adını dəyişmək | `renameColumnWithMockProvider()` | `PATCH /api/admin/tables/:tableId/columns/:columnId` | `{ label }` | `AdminTable` |
 | Sütunu silmək | `deleteColumnWithMockProvider()` | `DELETE /api/admin/tables/:tableId/columns/:columnId` | — | `AdminTable` |
 | Sətir əlavə etmək | `addRowWithMockProvider()` | `POST /api/admin/tables/:tableId/rows` | — | `AdminTable` |

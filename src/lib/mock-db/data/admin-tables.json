@@ -101,7 +101,7 @@
       {
         "id": "enterprise-1",
         "values": {
-          "name": "aaalo",
+          "name": "aaalomingen",
           "location": "test edirik",
           "address": "",
           "taxId": "",
@@ -116,7 +116,7 @@
           "investmentCommitmentsAndStatus": ""
         },
         "createdAt": "2026-01-01T00:00:00.000Z",
-        "updatedAt": "2026-07-22T20:12:49.291Z"
+        "updatedAt": "2026-07-22T20:45:29.993Z"
       },
       {
         "id": "enterprise-2",
@@ -262,7 +262,7 @@
     "parentTableId": null,
     "parentRowId": null,
     "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-07-22T20:22:08.193Z"
+    "updatedAt": "2026-07-22T20:45:29.994Z"
   },
   {
     "id": "root-property-complexes",
@@ -493,7 +493,7 @@
     "id": "root-land-plots",
     "slug": "torpaq-saheleri",
     "title": "Torpaq sahələri",
-    "description": "",
+    "description": "Torpaq sahələrinin özəlləşdirilməsi üzrə qeydiyyat",
     "columns": [
       {
         "id": "col-objectName",
@@ -802,7 +802,7 @@
     "parentTableId": null,
     "parentRowId": null,
     "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-07-22T19:39:52.814Z"
+    "updatedAt": "2026-07-22T20:34:57.321Z"
   },
   {
     "id": "table-6ff80ac1-b538-4fa9-b74a-796392e71060",
@@ -833,7 +833,7 @@
   {
     "id": "table-331a7f82-915a-40b4-9b31-ec9fb0d92b08",
     "slug": "aaalo",
-    "title": "aaalo",
+    "title": "aaalomineg",
     "columns": [
       {
         "id": "col-61ec6735-63d7-457f-a952-d2aed498d3b4",
@@ -857,7 +857,7 @@
     "parentRowId": "enterprise-1",
     "parentCellColumnId": "col-name",
     "createdAt": "2026-07-22T20:12:09.597Z",
-    "updatedAt": "2026-07-22T20:24:30.112Z"
+    "updatedAt": "2026-07-22T20:45:49.901Z"
   },
   {
     "id": "table-8f865cef-d1aa-41a7-b871-c175f0ec68c4",
@@ -895,5 +895,62 @@
     "parentCellColumnId": "col-61ec6735-63d7-457f-a952-d2aed498d3b4",
     "createdAt": "2026-07-22T20:24:36.102Z",
     "updatedAt": "2026-07-22T20:24:55.554Z"
+  },
+  {
+    "id": "table-cb840e2f-3d94-4c85-8e9e-0931d453e6d2",
+    "slug": "welcome",
+    "title": "welcome",
+    "columns": [
+      {
+        "id": "col-e963c7c6-cba2-479f-9af2-03cfbf3e969e",
+        "key": "salamig",
+        "label": "salamig",
+        "type": "text",
+        "order": 0
+      },
+      {
+        "id": "col-85eceaf0-cbd7-419d-9d03-10d612b9169e",
+        "key": "qoqqqili",
+        "label": "qoqqqili",
+        "type": "text",
+        "order": 1
+      }
+    ],
+    "rows": [
+      {
+        "id": "row-7b041bc2-6763-4c5f-9a46-2e4fbf19c694",
+        "values": {
+          "salamig": "sagolimmya",
+          "qoqqqili": ""
+        },
+        "createdAt": "2026-07-22T20:35:18.935Z",
+        "updatedAt": "2026-07-22T20:35:22.130Z"
+      }
+    ],
+    "parentTableId": "root-enterprises",
+    "parentRowId": "enterprise-2",
+    "parentCellColumnId": "col-name",
+    "createdAt": "2026-07-22T20:31:54.692Z",
+    "updatedAt": "2026-07-22T20:35:22.130Z"
+  },
+  {
+    "id": "table-863053f6-0bfc-4315-a3b6-23a59101f328",
+    "slug": "sagolimmya",
+    "title": "sagolimmya",
+    "columns": [
+      {
+        "id": "col-8616e671-9c3d-4efa-87aa-37a318f71bb3",
+        "key": "istirminlyaqa",
+        "label": "istirminlyaqa",
+        "type": "text",
+        "order": 0
+      }
+    ],
+    "rows": [],
+    "parentTableId": "table-cb840e2f-3d94-4c85-8e9e-0931d453e6d2",
+    "parentRowId": "row-7b041bc2-6763-4c5f-9a46-2e4fbf19c694",
+    "parentCellColumnId": "col-e963c7c6-cba2-479f-9af2-03cfbf3e969e",
+    "createdAt": "2026-07-22T20:35:26.103Z",
+    "updatedAt": "2026-07-22T20:35:31.153Z"
   }
 ]

@@ -11,7 +11,8 @@ export const addColumnSchema = z.object({
     .string()
     .min(1, "Sütun adı tələb olunur")
     .max(MAX_COLUMN_LABEL_LENGTH, "Sütun adı çox uzundur"),
-  type: z.enum(["text", "link", "file"]),
+  /** Tip artıq UI-də seçilmir; sistem box/hüceyrə üzərində işləyir. */
+  type: z.enum(["text", "link", "file"]).default("text"),
 });
 
 export const renameColumnSchema = z.object({

@@ -1,5 +1,3 @@
-import type { AdminColumnType } from "../types";
-
 export interface RootTableDefinition {
   id: string;
   slug: string;
@@ -43,15 +41,6 @@ export const DASHBOARD_ROOT_SLUG_TO_ADMIN_SLUG: Record<string, string> = {
   "property-complexes": "emlak-kompleksleri",
   "land-plots": "torpaq-saheleri",
 };
-
-export const COLUMN_TYPE_OPTIONS: Array<{
-  value: AdminColumnType;
-  label: string;
-}> = [
-  { value: "text", label: "Mətn" },
-  { value: "link", label: "Link" },
-  { value: "file", label: "Fayl (tezliklə)" },
-];
 
 export const MAX_COLUMN_LABEL_LENGTH = 120;
 export const MAX_TABLE_TITLE_LENGTH = 160;

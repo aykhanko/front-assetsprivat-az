@@ -18,6 +18,7 @@ import type {
   AdminTable,
   AdminTableBreadcrumb,
   ChildTableSummary,
+  DescendantSubTableSummary,
   ResolvedAdminTable,
 } from "../../types";
 
@@ -101,10 +102,53 @@ export async function getChildTablesByCellWithMockProvider(
   return grouped;
 }
 
+export async function getDescendantSubTablesWithMockProvider(
+  tableId: string
+): Promise<DescendantSubTableSummary[]> {
+  const root = await requireTable(tableId);
+  const results: DescendantSubTableSummary[] = [];
+
+  async function walk(
+    parent: AdminTable,
+    pathPrefix: string[],
+    depth: number
+  ): Promise<void> {
+    const children = await repository.findChildTables(parent.id);
+
+    for (const child of children) {
+      const relativePath = [...pathPrefix, child.slug];
+      const rowIndex = parent.rows.findIndex(
+        (row) => row.id === child.parentRowId
+      );
+      const column = parent.columns.find(
+        (item) => item.id === child.parentCellColumnId
+      );
+      const row = rowIndex >= 0 ? parent.rows[rowIndex] : undefined;
+
+      results.push({
+        id: child.id,
+        slug: child.slug,
+        title: child.title,
+        relativePath,
+        depth,
+        parentTableTitle: parent.title,
+        rowNumber: rowIndex >= 0 ? rowIndex + 1 : 0,
+        columnLabel: column?.label ?? "—",
+        cellValue: row && column ? (row.values[column.key] ?? "") : "",
+      });
+
+      await walk(child, relativePath, depth + 1);
+    }
+  }
+
+  await walk(root, [], 1);
+  return results;
+}
+
 export async function addColumnWithMockProvider({
   tableId,
   label,
-  type,
+  type = "text",
 }: AddColumnInput): Promise<AdminTable> {
   const table = await requireTable(tableId);
   const key = ensureUniqueSlug(
@@ -116,7 +160,7 @@ export async function addColumnWithMockProvider({
     id: generateId("col"),
     key,
     label,
-    type,
+    type: type ?? "text",
     order: table.columns.length,
   };
 

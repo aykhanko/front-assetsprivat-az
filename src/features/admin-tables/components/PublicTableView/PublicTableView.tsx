@@ -11,13 +11,8 @@ export interface PublicTableViewProps {
 
 /**
  * Admin Panel-də idarə olunan dinamik cədvəli `/dashboard` tərəfində
- * READ-ONLY (redaktə imkanı olmadan) göstərir. Admin tərəfindən əlavə
- * edilmiş sütun/sətir dəyişiklikləri birbaşa burada da görünür, çünki hər
- * iki tərəf eyni data mənbəyini oxuyur.
- *
- * Hər hansı hüceyrəyə alt cədvəl bağlanıbsa, həmin hüceyrə funksional
- * linkə çevrilir və alt cədvəlin read-only görünüşünə aparır. Digər
- * "link" tipli sütunlar isə yalnız vizual (mavi, altı xətli) görünür.
+ * READ-ONLY göstərir. Alt cədvəli olan hüceyrələr mavi hiperlink kimi,
+ * digərləri adi mətn kimi görünür.
  */
 export function PublicTableView({
   table,
@@ -68,17 +63,8 @@ export function PublicTableView({
                           className={styles.subTableValue}
                           title="Alt cədvələ bax"
                         >
-                          <span className={styles.subTableIcon} aria-hidden="true">
-                            🗂
-                          </span>
                           {value || subTable.title}
                         </Link>
-                      ) : column.type === "file" ? (
-                        <span className={styles.filePlaceholder}>
-                          {value || "Fayl əlavə olunmayıb"}
-                        </span>
-                      ) : column.type === "link" ? (
-                        <span className={styles.link}>{value}</span>
                       ) : (
                         <span>{value}</span>
                       )}

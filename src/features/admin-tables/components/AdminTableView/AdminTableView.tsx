@@ -7,12 +7,19 @@ import { Button } from "@/components/ui";
 import { useAdminTableMutations } from "../../hooks/useAdminTableMutations";
 import type { ChildTablesByCell } from "../../hooks/useAdminTableMutations";
 import { AddColumnDialog } from "../AddColumnDialog";
-import { AllSubTablesDialog } from "../AllSubTablesDialog";
+import {
+  AllSubTablesDialog,
+  type SubTablesDialogMode,
+} from "../AllSubTablesDialog";
 import { ColumnMenu } from "../ColumnMenu";
 import { ConfirmDialog } from "../ConfirmDialog";
 import { EditableCell, type CellNavigationDirection } from "../EditableCell";
 import { RowActionsCell } from "../RowActionsCell";
-import type { AdminTable, AdminTableBreadcrumb } from "../../types";
+import type {
+  AdminTable,
+  AdminTableBreadcrumb,
+  DescendantSubTableSummary,
+} from "../../types";
 import styles from "./AdminTableView.module.css";
 
 export interface AdminTableViewProps {
@@ -20,6 +27,7 @@ export interface AdminTableViewProps {
   breadcrumbs: AdminTableBreadcrumb[];
   path: string[];
   initialChildTablesByCell: ChildTablesByCell;
+  initialDescendantSubTables: DescendantSubTableSummary[];
 }
 
 interface ActiveCell {
@@ -39,6 +47,7 @@ export function AdminTableView({
   breadcrumbs,
   path,
   initialChildTablesByCell,
+  initialDescendantSubTables,
 }: AdminTableViewProps) {
   const router = useRouter();
   const {
@@ -59,7 +68,8 @@ export function AdminTableView({
   } = useAdminTableMutations({ initialTable, initialChildTablesByCell });
 
   const [isAddColumnOpen, setIsAddColumnOpen] = useState(false);
-  const [isAllSubTablesOpen, setIsAllSubTablesOpen] = useState(false);
+  const [subTablesDialogMode, setSubTablesDialogMode] =
+    useState<SubTablesDialogMode | null>(null);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleDraft, setTitleDraft] = useState(table.title);
   const [activeCell, setActiveCell] = useState<ActiveCell | null>(null);
@@ -138,12 +148,13 @@ export function AdminTableView({
     setActiveCell(getAdjacentCell(current, direction));
   };
 
-  const subTableCount = Object.values(childTablesByCell).reduce(
+  const directSubTableCount = Object.values(childTablesByCell).reduce(
     (total, byColumn) =>
       total +
       Object.values(byColumn).reduce((sum, children) => sum + children.length, 0),
     0
   );
+  const allSubTableCount = initialDescendantSubTables.length;
 
   return (
     <div className={styles.page}>
@@ -195,11 +206,23 @@ export function AdminTableView({
           <Button
             type="button"
             variant="outline"
-            onClick={() => setIsAllSubTablesOpen(true)}
+            onClick={() => setSubTablesDialogMode("all")}
           >
-            🗂 Bütün alt cədvəllər
-            {subTableCount > 0 ? (
-              <span className={styles.subTableCountBadge}>{subTableCount}</span>
+            Bütün alt cədvəllər
+            {allSubTableCount > 0 ? (
+              <span className={styles.subTableCountBadge}>{allSubTableCount}</span>
+            ) : null}
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setSubTablesDialogMode("direct")}
+          >
+            Alt cədvəllər
+            {directSubTableCount > 0 ? (
+              <span className={styles.subTableCountBadge}>
+                {directSubTableCount}
+              </span>
             ) : null}
           </Button>
           <Button
@@ -284,7 +307,6 @@ export function AdminTableView({
                         <td key={column.id}>
                           <EditableCell
                             value={row.values[column.key] ?? ""}
-                            type={column.type}
                             isEditing={isEditing}
                             onStartEdit={() => setActiveCell(cellKey)}
                             onCancelEdit={() =>
@@ -335,9 +357,10 @@ export function AdminTableView({
                             );
                           })
                         }
-                        onDeleteSubTable={(columnId, childTableId) =>
-                          deleteSubTable(row.id, columnId, childTableId)
-                        }
+                        onDeleteSubTable={(columnId, childTableId) => {
+                          deleteSubTable(row.id, columnId, childTableId);
+                          router.refresh();
+                        }}
                         onDeleteRow={() => deleteRow(row.id)}
                       />
                     </td>
@@ -352,19 +375,21 @@ export function AdminTableView({
       <AddColumnDialog
         isOpen={isAddColumnOpen}
         isPending={isPending}
-        onSubmit={(label, type) => {
-          addColumn(label, type);
+        onSubmit={(label) => {
+          addColumn(label);
           setIsAddColumnOpen(false);
         }}
         onCancel={() => setIsAddColumnOpen(false)}
       />
 
       <AllSubTablesDialog
-        isOpen={isAllSubTablesOpen}
+        isOpen={subTablesDialogMode !== null}
+        mode={subTablesDialogMode ?? "direct"}
         table={table}
         path={path}
         childTablesByCell={childTablesByCell}
-        onClose={() => setIsAllSubTablesOpen(false)}
+        descendantSubTables={initialDescendantSubTables}
+        onClose={() => setSubTablesDialogMode(null)}
       />
 
       <ConfirmDialog
@@ -383,6 +408,7 @@ export function AdminTableView({
               pendingSubTableDeletion.columnId,
               pendingSubTableDeletion.childTableId
             );
+            router.refresh();
           }
           setPendingSubTableDeletion(null);
         }}

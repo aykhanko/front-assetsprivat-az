@@ -9,7 +9,7 @@ import type {
   RenameTableInput,
   UpdateCellInput,
 } from "../../validation/table.schema";
-import type { AdminTable, ChildTableSummary, ResolvedAdminTable } from "../../types";
+import type { AdminTable, ChildTableSummary, DescendantSubTableSummary, ResolvedAdminTable } from "../../types";
 
 /**
  * Real API provayderi — `APP_DATA=api` seçildikdə istifadə olunacaq.
@@ -36,6 +36,12 @@ export async function getChildTablesByCellWithApiProvider(
   _tableId: string
 ): Promise<Record<string, Record<string, ChildTableSummary[]>>> {
   return notImplemented("getChildTablesByCell");
+}
+
+export async function getDescendantSubTablesWithApiProvider(
+  _tableId: string
+): Promise<DescendantSubTableSummary[]> {
+  return notImplemented("getDescendantSubTables");
 }
 
 export async function addColumnWithApiProvider(

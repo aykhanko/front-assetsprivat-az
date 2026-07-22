@@ -12,7 +12,7 @@ import {
   renameTableAction,
   updateCellAction,
 } from "../actions/admin-table.actions";
-import type { AdminColumnType, AdminTable, ChildTablesByCell } from "../types";
+import type { AdminTable, ChildTablesByCell } from "../types";
 
 export type { ChildTablesByCell } from "../types";
 
@@ -41,9 +41,13 @@ export function useAdminTableMutations({
   const clearError = useCallback(() => setErrorMessage(null), []);
 
   const addColumn = useCallback(
-    (label: string, type: AdminColumnType) => {
+    (label: string) => {
       startTransition(async () => {
-        const result = await addColumnAction({ tableId: table.id, label, type });
+        const result = await addColumnAction({
+          tableId: table.id,
+          label,
+          type: "text",
+        });
         if (result.success && result.table) {
           setTable(result.table);
           setErrorMessage(null);

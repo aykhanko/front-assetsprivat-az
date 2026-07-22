@@ -51,17 +51,6 @@
   background-color: var(--background-muted);
 }
 
-.link {
-  color: var(--link-color);
-  text-decoration: underline;
-  cursor: default;
-}
-
-.filePlaceholder {
-  color: var(--foreground-muted);
-  font-style: italic;
-}
-
 .emptyState,
 .emptyRow {
   padding: var(--space-6);
@@ -72,14 +61,6 @@
 }
 
 .subTableValue {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: var(--space-1);
-  color: var(--brand-secondary, var(--link-color));
+  color: var(--link-color);
   text-decoration: underline;
-  font-weight: var(--font-weight-medium);
-}
-
-.subTableIcon {
-  flex-shrink: 0;
 }
