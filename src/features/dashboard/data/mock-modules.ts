@@ -14,7 +14,7 @@ export const MOCK_DASHBOARD_MODULES: DashboardModule[] = [
     description: "Özəlləşdirilən müəssisələr üzrə məlumatların idarə edilməsi",
     icon: "enterprise",
     href: "/dashboard/enterprises",
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     id: "property-complexes",

@@ -7,6 +7,8 @@
   min-height: 168px;
   padding: var(--space-6);
   text-align: left;
+  text-decoration: none;
+  color: inherit;
   background-color: var(--surface);
   border: var(--border-width) solid var(--surface-border);
   border-radius: var(--radius-sm);

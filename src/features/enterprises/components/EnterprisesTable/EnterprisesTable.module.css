@@ -1,0 +1,58 @@
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: var(--surface);
+  border: var(--border-width) solid var(--surface-border);
+  border-radius: var(--radius-none);
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  min-width: 1900px;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.table th,
+.table td {
+  border: var(--border-width) solid var(--surface-border);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.table thead th {
+  background-color: var(--brand-primary-strong);
+  color: var(--text-on-brand);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table thead th:first-child {
+  width: 3.5rem;
+  text-align: center;
+}
+
+.serialCell {
+  text-align: center;
+  color: var(--foreground-muted);
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: var(--color-white);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--background-muted);
+}
+
+.link {
+  color: var(--link-color);
+  text-decoration: underline;
+  cursor: default;
+}
